@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "cd packages/react-scripts && node bin/react-scripts.js build",
+    "changelog": "lerna-changelog",
+    "start": "cd packages/react-scripts && node bin/react-scripts.js start",
+    "test": "",
+    "format":
+      "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "eslint": "4.16.0",
+    "husky": "0.14.3",
+    "lerna": "2.7.1",
+    "lerna-changelog": "0.7.0",
+    "lint-staged": "6.0.0",
+    "prettier": "1.10.2"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --trailing-comma es5 --single-quote --write", "git add"]
+  }
+}
