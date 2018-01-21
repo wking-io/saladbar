@@ -5,7 +5,7 @@
     "build": "cd packages/react-scripts && node bin/react-scripts.js build",
     "changelog": "lerna-changelog",
     "start": "cd packages/react-scripts && node bin/react-scripts.js start",
-    "test": "",
+    "test": "babel-tape-runner packages/**/*.test.js | faucet",
     "format":
       "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "precommit": "lint-staged"
