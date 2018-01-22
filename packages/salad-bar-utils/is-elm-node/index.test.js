@@ -4,15 +4,15 @@ import isElmNode from './index';
 test('isElmNode returns true when Node is of type Element', assert => {
   const expected = true;
   const el = { nodeType: 1 };
-  const result = isElmNode(el);
-  assert.equals(expected, result);
+  const actual = isElmNode(el);
+  assert.equals(actual, expected);
   assert.end();
 });
 
 test('isElmNode returns false when Node is not of type Element', assert => {
   const expected = false;
   const el = { nodeType: 0 };
-  const result = isElmNode(el);
-  assert.equals(expected, result);
+  const actual = isElmNode(el);
+  assert.equals(actual, expected);
   assert.end();
 });

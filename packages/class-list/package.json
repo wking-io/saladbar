@@ -7,6 +7,7 @@
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "license": "Apache-2.0",
   "private": false,
+  "files": ["index.js", "_classList.js"],
   "devDependencies": {
     "babel": "6.23.0",
     "babel-preset-env": "1.6.1",

@@ -1,25 +1,36 @@
 import { difference } from 'ramda';
 
-const makeElement = ({
+const createElement = ({
   classes = ['default-class'],
   attrs = { 'attr-default': 'true' },
-  dataset = { 'data-default': 'true' },
-  style = { height: '100px' },
+  data = { 'data-default': 'true' },
+  styles = { height: '100px' },
 } = {}) => ({
   classList: {
     values: classes,
-    add: val => {
-      this.classList.values.concat(val);
-    },
-    remove: val => {
+    add(val) {
+      let newClasses;
       if (typeof val === 'string') {
-        const newClasses = difference([val], this.classList.values);
+        newClasses = difference([val], this.values);
       } else if (Array.isArray(val)) {
-        const newClasses = difference(val, this.classList.values);
+        newClasses = difference(val, this.values);
+      } else {
+        return this.values;
+      }
+      this.values = this.values.concat(newClasses);
+      return this.values;
+    },
+    remove(val) {
+      if (typeof val === 'string') {
+        const newClasses = difference([val], this.values);
+      } else if (Array.isArray(val)) {
+        const newClasses = difference(val, this.classes);
       } else {
         return false;
       }
-      this.classList.values.concat(newClasses);
+      this.classes.concat(newClasses);
     },
   },
 });
+
+export default createElement;
