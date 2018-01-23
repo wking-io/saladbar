@@ -1,0 +1,28 @@
+{
+  "name": "saladbar",
+  "version": "0.0.1",
+  "description": "Library of composable dom functions.",
+  "main": "index.js",
+  "repository": "https://github.com/wking-io/salad-bar",
+  "author": "Will King <contact@wking.io> (https://www.wking.io/)",
+  "license": "Apache-2.0",
+  "private": false,
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-tape-runner": "2.0.1",
+    "faucet": "0.0.1",
+    "tape": "4.8.0"
+  },
+  "dependencies": {
+    "saladbar.classlist": "0.0.1",
+    "saladbar.addclass": "0.0.1",
+    "saladbar.removeclass": "0.0.1",
+    "saladbar.hasclass": "0.0.1",
+    "saladbar.toggleclass": "0.0.1",
+    "saladbar.utils": "0.0.1"
+  },
+  "scripts": {
+    "test": "babel-tape-runner *.test.js | faucet"
+  }
+}
