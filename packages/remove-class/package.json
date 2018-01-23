@@ -7,7 +7,9 @@
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "license": "Apache-2.0",
   "private": false,
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.6.1",
@@ -16,8 +18,8 @@
     "tape": "4.8.0"
   },
   "dependencies": {
-    "saladbar.classlist": "0.0.1",
-    "saladbar.utils": "0.0.1"
+    "saladbar.classlist": "^0.0.1",
+    "saladbar.utils": "^0.0.1"
   },
   "scripts": {
     "test": "babel-tape-runner *.test.js | faucet"

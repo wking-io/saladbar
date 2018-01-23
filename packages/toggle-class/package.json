@@ -15,8 +15,8 @@
     "tape": "4.8.0"
   },
   "dependencies": {
-    "saladbar.classlist": "0.0.1",
-    "saladbar.utils": "0.0.1"
+    "saladbar.classlist": "^0.0.1",
+    "saladbar.utils": "^0.0.1"
   },
   "scripts": {
     "test": "babel-tape-runner *.test.js | faucet"
