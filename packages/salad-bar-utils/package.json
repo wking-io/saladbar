@@ -11,9 +11,9 @@
   "files": [
     "**/index.js"
   ],
-  "private": true,
+  "private": false,
   "devDependencies": {
-    "babel": "6.23.0",
+    "babel-cli": "6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-tape-runner": "2.0.1",
     "faucet": "0.0.1",
@@ -22,5 +22,8 @@
   "dependencies": {
     "fluture": "8.0.1",
     "ramda": "0.25.0"
+  },
+  "scripts": {
+    "test": "babel-tape-runner **/*.test.js | faucet"
   }
 }

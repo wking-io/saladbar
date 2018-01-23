@@ -1,4 +1,4 @@
-import { difference } from 'ramda';
+import { difference, reject, map, equals } from 'ramda';
 
 const createElement = ({
   classes = ['default-class'],
@@ -21,14 +21,16 @@ const createElement = ({
       return this.values;
     },
     remove(val) {
+      let newClassList;
       if (typeof val === 'string') {
-        const newClasses = difference([val], this.values);
+        newClassList = difference(this.values, [val]);
       } else if (Array.isArray(val)) {
-        const newClasses = difference(val, this.classes);
+        newClassList = difference(this.values, val);
       } else {
-        return false;
+        return this.values;
       }
-      this.classes.concat(newClasses);
+      this.values = newClassList;
+      return this.values;
     },
   },
 });
