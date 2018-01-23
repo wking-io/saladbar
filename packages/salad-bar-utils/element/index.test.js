@@ -50,3 +50,30 @@ test('createElement constructor classList.remove method works by removing an arr
   assert.deepEqual(actual.sort(), expected.sort());
   assert.end();
 });
+
+test('createElement constructor classList.toggle method works by toggling a class on and off on a single element.', assert => {
+  const testEl = createElement({ classes: ['default'] });
+  const actualOne = testEl.classList.toggle('toggle-this');
+  const expectedOne = ['default', 'toggle-this'];
+  assert.deepEqual(actualOne.sort(), expectedOne.sort());
+  const actualTwo = testEl.classList.toggle('toggle-this');
+  const expectedTwo = ['default'];
+  assert.deepEqual(actualTwo.sort(), expectedTwo.sort());
+  assert.end();
+});
+
+test('createElement constructor classList.contains method works by returning true when a class exists on an element.', assert => {
+  const testEl = createElement({ classes: ['default'] });
+  const actual = testEl.classList.contains('default');
+  const expected = true;
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('createElement constructor classList.contains method works by returning false when a class does not exists on an element.', assert => {
+  const testEl = createElement({ classes: ['default'] });
+  const actual = testEl.classList.contains('not-real');
+  const expected = false;
+  assert.equal(actual, expected);
+  assert.end();
+});

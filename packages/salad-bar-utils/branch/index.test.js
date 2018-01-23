@@ -1,5 +1,5 @@
 import test from 'tape';
-import { of, value } from 'fluture';
+import { of } from 'fluture';
 import branch from './index';
 
 test('branch evaluates single value successfully', assert => {

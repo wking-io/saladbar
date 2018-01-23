@@ -1,4 +1,4 @@
-import { difference, reject, map, equals } from 'ramda';
+import { difference } from 'ramda';
 
 const createElement = ({
   classes = ['default-class'],
@@ -6,6 +6,12 @@ const createElement = ({
   data = { 'data-default': 'true' },
   styles = { height: '100px' },
 } = {}) => ({
+  attributes: attrs,
+  style: styles,
+  dataset: {
+    values: data,
+  },
+  setAttribute: () => {},
   classList: {
     values: classes,
     add(val) {
@@ -31,6 +37,20 @@ const createElement = ({
       }
       this.values = newClassList;
       return this.values;
+    },
+    toggle(val) {
+      const classExists = difference([val], this.values).length === 0;
+      if (classExists) {
+        const newClassList = difference(this.values, [val]);
+        this.values = newClassList;
+      } else {
+        const newClasses = difference([val], this.values);
+        this.values = this.values.concat(newClasses);
+      }
+      return this.values;
+    },
+    contains(val) {
+      return difference([val], this.values).length === 0;
     },
   },
 });
