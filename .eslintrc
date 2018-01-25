@@ -6,5 +6,8 @@
     "es6": true,
     "browser": true
   },
-  "extends": ["eslint:recommended", "prettier"]
+  "extends": ["eslint:all", "prettier"],
+  "rules": {
+    "one-var": ["error", { "var": "always", "let": "never", "const": "never" }]
+  }
 }
