@@ -1,5 +1,7 @@
-import { ifElse, map } from 'ramda';
+import { ifElse, traverse } from 'ramda';
+import { of } from 'fluture';
+import isArray from '../is-array';
 
-export default function _branch(cond, fn) {
-  return ifElse(cond, map(fn), fn);
+export default function _branch(fn) {
+  return ifElse(isArray, traverse(of, fn), fn);
 }
