@@ -1,17 +1,15 @@
 {
   "name": "saladbar.utils",
   "version": "0.0.1",
-  "description": "Utility functions to make developing in different packages easier",
+  "description":
+    "Utility functions to make developing in different packages easier.",
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "repository": "wking-io/salad-bar",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/wking-io/salad-bar/issues"
   },
-  "files": [
-    "**/index.js"
-  ],
-  "private": false,
+  "files": ["**/index.js"],
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.6.1",

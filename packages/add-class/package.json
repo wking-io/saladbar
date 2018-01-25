@@ -1,15 +1,12 @@
 {
   "name": "saladbar.addclass",
   "version": "0.0.1",
-  "description": "saladbar.addclass method exported as a module",
+  "description": "saladbar.addclass method exported as a module.",
   "main": "index.js",
   "repository": "https://github.com/wking-io/salad-bar",
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "license": "Apache-2.0",
-  "private": false,
-  "files": [
-    "index.js"
-  ],
+  "files": ["index.js"],
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.6.1",
