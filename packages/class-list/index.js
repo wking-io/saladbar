@@ -1,9 +1,9 @@
-import { curry } from 'ramda';
 import _classList from './_classList';
 import branch from 'saladbar.utils/branch';
+import { curry } from 'ramda';
 
-function classList(method, className, el) {
-  return branch(_classList(method, className))(el);
-}
+const classList = curry((method, className, el) =>
+  branch(_classList(method, className))(el)
+);
 
-export default curry(classList);
+export default classList;

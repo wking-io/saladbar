@@ -1,13 +1,13 @@
-import { curry } from 'ramda';
 import { of, reject } from 'fluture';
+import { curry } from 'ramda';
 
 // _getAttr :: String -> DOM Element -> Future Error String
-function _getAttr(attr, el) {
+const _getAttr = curry((attr, el) => {
   if (el.hasAttribute(attr)) {
     return of(el.getAttribute(attr));
   }
 
   return reject(new ReferenceError(`Sorry, ${attr} was not found.`));
-}
+});
 
-export default curry(_getAttr);
+export default _getAttr;

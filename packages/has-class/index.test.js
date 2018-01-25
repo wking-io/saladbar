@@ -1,7 +1,7 @@
-import test from 'tape';
 import createElement from 'saladbar.utils/element';
-import { of } from 'fluture';
 import hasClass from './index';
+import { of } from 'fluture';
+import test from 'tape';
 
 test('hasClass returns true when class exists on an element', assert => {
   const testEl = createElement({ classes: ['default'] });

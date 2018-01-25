@@ -1,3 +1,3 @@
-export default function isArray(a) {
-  return Array.isArray(a);
-}
+const isArray = arr => Array.isArray(arr);
+
+export default isArray;

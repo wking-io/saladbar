@@ -1,5 +1,5 @@
-import test from 'tape';
 import createElement from './index.js';
+import test from 'tape';
 
 test('createElement constructor classList.add method works by adding a single class that does not exist.', assert => {
   const expected = ['default', 'new-class'];
@@ -75,5 +75,53 @@ test('createElement constructor classList.contains method works by returning fal
   const actual = testEl.classList.contains('not-real');
   const expected = false;
   assert.equal(actual, expected);
+  assert.end();
+});
+
+test('createElement constructor hasAttribute method returns true if attribute exists on an element.', assert => {
+  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const actual = testEl.hasAttribute('aria-expanded');
+  const expected = true;
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('createElement constructor hasAttribute method returns false if attribute does not exist on an element.', assert => {
+  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const actual = testEl.hasAttribute('aria-stuff');
+  const expected = false;
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('createElement constructor getAttribute method returns value if attribute exists on an element.', assert => {
+  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const actual = testEl.getAttribute('aria-expanded');
+  const expected = 'false';
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('createElement constructor getAttribute method returns null if attribute does not exist on an element.', assert => {
+  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const actual = testEl.getAttribute('aria-stuff');
+  const expected = null;
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('createElement constructor setAttribute method updates an existing attribute on an element.', assert => {
+  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const actual = testEl.setAttribute('aria-expanded', 'true');
+  const expected = 'true';
+  assert.equal(actual['aria-expanded'], expected);
+  assert.end();
+});
+
+test('createElement constructor setAttribute method creates a new attribute on an element.', assert => {
+  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const actual = testEl.setAttribute('aria-stuff', 'true');
+  const expected = 'true';
+  assert.equal(actual['aria-stuff'], expected);
   assert.end();
 });

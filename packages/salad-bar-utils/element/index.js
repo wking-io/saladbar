@@ -59,8 +59,7 @@ const createElement = ({
     return difference([val], Object.keys(this.attributes)).length === noDiff;
   },
   setAttribute(key, val) {
-    Object.assign(this.attributes, { key: val });
-    return 'done';
+    return Object.assign(this.attributes, { [key]: val });
   },
   style: styles,
 });

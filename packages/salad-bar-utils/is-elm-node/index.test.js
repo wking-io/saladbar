@@ -1,5 +1,5 @@
-import test from 'tape';
 import isElmNode from './index';
+import test from 'tape';
 
 test('isElmNode returns true when Node is of type Element', assert => {
   const expected = true;

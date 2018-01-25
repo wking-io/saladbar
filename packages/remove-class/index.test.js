@@ -1,7 +1,7 @@
-import test from 'tape';
-import removeClass from './index';
 import createElement from 'saladbar.utils/element';
 import { of } from 'fluture';
+import removeClass from './index';
+import test from 'tape';
 
 test('removeClass removes a class from an element', assert => {
   const testEl = createElement({ classes: ['default', 'remove-this'] });

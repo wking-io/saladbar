@@ -1,7 +1,7 @@
-import test from 'tape';
 import addClass from './index';
 import createElement from 'saladbar.utils/element';
 import { of } from 'fluture';
+import test from 'tape';
 
 test('addClass adds a class to an element', assert => {
   const testEl = createElement({ classes: ['default'] });

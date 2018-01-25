@@ -1,6 +1,6 @@
-import test from 'tape';
 import createElement from 'saladbar.utils/element';
 import { of } from 'fluture';
+import test from 'tape';
 import toggleClass from './index';
 
 test('toggleClass toggles single class from an element', assert => {

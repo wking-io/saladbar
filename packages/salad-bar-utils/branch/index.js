@@ -1,15 +1,14 @@
-import { isFuture } from 'fluture';
 import { chain, curry } from 'ramda';
 import _branch from './_branch';
+import { isFuture } from 'fluture';
 
-function branch(fn, el) {
+const branch = curry((fn, el) => {
   if (isFuture(el)) {
     return chain(_branch(fn))(el);
-  } else {
-    let result;
-    _branch(fn)(el).fork(err => (result = err), val => (result = val));
-    return result;
   }
-}
+  let result = el;
+  _branch(fn)(el).fork(err => (result = err), val => (result = val));
+  return result;
+});
 
-export default curry(branch);
+export default branch;

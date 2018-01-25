@@ -1,5 +1,7 @@
-import test from 'tape';
+/* eslint no-magic-numbers: 0 */
+
 import isArray from './index';
+import test from 'tape';
 
 test('isArray returns true if passed an array', assert => {
   const arr = [1, 2, 3];
