@@ -8,6 +8,8 @@
   },
   "extends": ["eslint:all", "prettier"],
   "rules": {
-    "one-var": ["error", { "var": "always", "let": "never", "const": "never" }]
+    "one-var": ["error", { "var": "always", "let": "never", "const": "never" }],
+    "no-ternary": 0,
+    "no-prototype-builtins": 0
   }
 }
