@@ -6,7 +6,7 @@ import isArray from 'saladbar.utils/is-array';
 import isElmNode from 'saladbar.utils/is-elm-node';
 import test from 'tape';
 
-test('dom returns a future that resolves to an element when element exists.', assert => {
+test('domAll returns a future that resolves to an element when element exists.', assert => {
   const document = createElement(3, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = domAll('.default', root);
@@ -21,7 +21,7 @@ test('dom returns a future that resolves to an element when element exists.', as
   assert.end();
 });
 
-test('dom returns a future that resolves to an error when element does not exists.', assert => {
+test('domAll returns a future that resolves to an error when element does not exists.', assert => {
   const document = createElement(3, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = domAll('.not-real', root);
