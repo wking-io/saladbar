@@ -1,4 +1,5 @@
 import { curry } from 'ramda';
+import isArray from 'saladbar.utils/is-array';
 import { of } from 'fluture';
 
 /*
@@ -6,7 +7,10 @@ import { of } from 'fluture';
  * @sig String -> [String] -> DOM Element -> Future DOM Element
  */
 const _classList = curry((method, classname, el) => {
-  el.classList[method](classname);
+  isArray(classname)
+    ? el.classList[method](...classname)
+    : el.classList[method](classname);
+
   return of(el);
 });
 

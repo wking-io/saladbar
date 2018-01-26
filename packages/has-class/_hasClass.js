@@ -1,7 +1,9 @@
 import { curry } from 'ramda';
 import { of } from 'fluture';
 
-// _hasClass :: String -> DOM Element -> Future Bool
+/*
+ * @sig String -> DOM Element -> Future Bool
+ */
 const _hasClass = curry((classname, el) =>
   of(el.classList.contains(classname))
 );

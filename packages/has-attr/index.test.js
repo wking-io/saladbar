@@ -1,10 +1,16 @@
+/* eslint no-magic-numbers: 0 */
+
 import createElement from 'saladbar.utils/element';
 import hasAttr from './index';
 import { of } from 'fluture';
 import test from 'tape';
 
 test('hasAttr returns true when attribute exists on an element', assert => {
-  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
   const result = hasAttr('aria-expanded', testEl);
   const expected = true;
   assert.equal(result, expected);
@@ -12,7 +18,11 @@ test('hasAttr returns true when attribute exists on an element', assert => {
 });
 
 test('hasAttr returns false when attribute does not exists on an element', assert => {
-  const testEl = createElement({ attrs: { 'aria-expanded': 'false' } });
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
   const result = hasAttr('not-real', testEl);
   const expected = false;
   assert.equal(result, expected);
@@ -20,7 +30,11 @@ test('hasAttr returns false when attribute does not exists on an element', asser
 });
 
 test('hasAttr returns true when attribute exists on a future element', assert => {
-  const testEl = of(createElement({ attrs: { 'aria-expanded': 'false' } }));
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = of(document.querySelector('.default'));
   const result = hasAttr('aria-expanded', testEl);
   const expected = true;
   result.value(bool => assert.equal(bool, expected));
@@ -28,7 +42,11 @@ test('hasAttr returns true when attribute exists on a future element', assert =>
 });
 
 test('hasAttr returns false when attribute does not exists on a future element', assert => {
-  const testEl = of(createElement({ attrs: { 'aria-expanded': 'false' } }));
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = of(document.querySelector('.default'));
   const result = hasAttr('not-real', testEl);
   const expected = false;
   result.value(bool => assert.equal(bool, expected));

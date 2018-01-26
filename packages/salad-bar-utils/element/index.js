@@ -1,67 +1,19 @@
-import { difference } from 'ramda';
+import { JSDOM } from 'jsdom';
 
-const noDiff = 0;
-const createElement = ({
-  classes = ['default-class'],
-  attrs = { 'attr-default': 'true' },
-  data = { 'data-default': 'true' },
-  styles = { height: '100px' },
-} = {}) => ({
-  attributes: attrs,
-  classList: {
-    add(val) {
-      let newClasses = [];
-      if (typeof val === 'string') {
-        newClasses = difference([val], this.values);
-      } else if (Array.isArray(val)) {
-        newClasses = difference(val, this.values);
-      } else {
-        return this.values;
-      }
-      this.values = this.values.concat(newClasses);
-      return this.values;
-    },
-    contains(val) {
-      return difference([val], this.values).length === noDiff;
-    },
-    remove(val) {
-      let newClasses = [];
-      if (typeof val === 'string') {
-        newClasses = difference(this.values, [val]);
-      } else if (Array.isArray(val)) {
-        newClasses = difference(this.values, val);
-      } else {
-        return this.values;
-      }
-      this.values = newClasses;
-      return this.values;
-    },
-    toggle(val) {
-      const classExists = difference([val], this.values).length === noDiff;
-      if (classExists) {
-        const newClassList = difference(this.values, [val]);
-        this.values = newClassList;
-      } else {
-        const newClasses = difference([val], this.values);
-        this.values = this.values.concat(newClasses);
-      }
-      return this.values;
-    },
-    values: classes,
-  },
-  dataset: {
-    values: data,
-  },
-  getAttribute(key) {
-    return this.attributes.hasOwnProperty(key) ? this.attributes[key] : null;
-  },
-  hasAttribute(val) {
-    return difference([val], Object.keys(this.attributes)).length === noDiff;
-  },
-  setAttribute(key, val) {
-    return Object.assign(this.attributes, { [key]: val });
-  },
-  style: styles,
-});
+const newElement = (count, { attrs, classes, id, styles }) => {
+  const el = `<p class="${classes}" id="${id}" ${attrs.join(
+    ' '
+  )} style="${styles}">Hello!</p>`;
+  return el.repeat(count);
+};
+const createElement = (
+  count,
+  {
+    attrs = ['aria-expanded="false"', 'data-default="true"'],
+    classes = 'default-class',
+    id = 'default-id',
+    styles = { height: '100px' },
+  } = {}
+) => JSDOM.fragment(newElement(count, { attrs, classes, id, styles }));
 
 export default createElement;
