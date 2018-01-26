@@ -18,8 +18,8 @@ test('getProp returns error if property not found on single element', assert => 
   const document = createElement(1, { classes: 'default' });
   const testEl = document.querySelector('.default');
   const actual = getProp('not-real', testEl);
-  const expected = 'ReferenceError: Sorry, not-real was not found.';
-  assert.equal(actual.toString(), expected);
+  const expected = true;
+  assert.equal(actual.hasOwnProperty('error'), expected);
   assert.end();
 });
 
@@ -39,9 +39,9 @@ test('getProp returns error if property not found on future element', assert => 
   const document = createElement(1, { classes: 'default' });
   const futureEl = of(document.querySelector('.default'));
   const actual = getProp('not-real', futureEl);
-  const expected = 'ReferenceError: Sorry, not-real was not found.';
+  const expected = true;
   actual.fork(
-    err => assert.equal(err.toString(), expected),
+    err => assert.equal(err.hasOwnProperty('error'), expected),
     () => assert.fail('getProp did not return an error.')
   );
   assert.end();

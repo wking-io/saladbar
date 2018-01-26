@@ -24,8 +24,8 @@ test('getAttr returns error if attribute not found on single element', assert =>
   });
   const testEl = document.querySelector('.default');
   const actual = getAttr('not-real', testEl);
-  const expected = 'ReferenceError: Sorry, not-real was not found.';
-  assert.equal(actual.toString(), expected);
+  const expected = true;
+  assert.equal(actual.hasOwnProperty('error'), expected);
   assert.end();
 });
 
@@ -51,9 +51,9 @@ test('getAttr returns error if attribute not found on future element', assert =>
   });
   const futureEl = of(document.querySelector('.default'));
   const actual = getAttr('not-real', futureEl);
-  const expected = 'ReferenceError: Sorry, not-real was not found.';
+  const expected = true;
   actual.fork(
-    err => assert.equal(err.toString(), expected),
+    err => assert.equal(err.hasOwnProperty('error'), expected),
     () => assert.fail('getAttr did not return an error.')
   );
   assert.end();

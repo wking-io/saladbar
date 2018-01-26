@@ -8,7 +8,7 @@ const _getAttr = curry((prop, el) => {
     return of(el[prop]);
   }
 
-  return reject(new ReferenceError(`Sorry, ${prop} was not found.`));
+  return reject({ error: `Sorry, ${prop} was not found.` });
 });
 
 export default _getAttr;

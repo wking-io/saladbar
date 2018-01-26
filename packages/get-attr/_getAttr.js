@@ -7,7 +7,7 @@ const _getAttr = curry((attr, el) => {
     return of(el.getAttribute(attr));
   }
 
-  return reject(new ReferenceError(`Sorry, ${attr} was not found.`));
+  return reject({ error: `Sorry, ${attr} was not found.` });
 });
 
 export default _getAttr;
