@@ -17,7 +17,7 @@
   "dependencies": {
     "fluture": "8.0.1",
     "ramda": "0.25.0",
-    "saladbar.getProp": "^0.0.1"
+    "saladbar.getprop": "^0.0.1"
   },
   "scripts": {
     "test": "babel-tape-runner *.test.js | tap-spec"
