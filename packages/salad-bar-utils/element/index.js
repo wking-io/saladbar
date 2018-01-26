@@ -14,6 +14,14 @@ const createElement = (
     id = 'default-id',
     styles = { height: '100px' },
   } = {}
-) => JSDOM.fragment(newElement(count, { attrs, classes, id, styles }));
+) =>
+  JSDOM.fragment(
+    `<div class="wrapper">${newElement(count, {
+      attrs,
+      classes,
+      id,
+      styles,
+    })}</div>`
+  );
 
 export default createElement;
