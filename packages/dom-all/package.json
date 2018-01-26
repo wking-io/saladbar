@@ -19,6 +19,6 @@
     "saladbar.utils": "^0.0.1"
   },
   "scripts": {
-    "test": "babel-tape-runner *.test.js | faucet"
+    "test": "babel-tape-runner *.test.js | tap-spec"
   }
 }
