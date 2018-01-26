@@ -6,12 +6,19 @@
   "repository": "https://github.com/wking-io/salad-bar",
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "license": "Apache-2.0",
-  "private": false,
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-tape-runner": "2.0.1",
-    "faucet": "0.0.1",
-    "tape": "4.8.0"
+    "tape": "4.8.0",
+    "tap-spec": "4.1.1"
+  },
+  "dependencies": {
+    "fluture": "8.0.1",
+    "ramda": "0.25.0",
+    "saladbar.utils": "^0.0.1"
+  },
+  "scripts": {
+    "test": "babel-tape-runner *.test.js | tap-spec"
   }
 }
