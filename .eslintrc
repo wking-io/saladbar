@@ -11,6 +11,10 @@
     "one-var": ["error", { "var": "always", "let": "never", "const": "never" }],
     "no-ternary": 0,
     "no-prototype-builtins": 0,
-    "no-underscore-dangle": 0
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ]
   }
 }
