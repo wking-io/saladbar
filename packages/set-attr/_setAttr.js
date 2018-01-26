@@ -1,7 +1,9 @@
 import { curry } from 'ramda';
 import { of } from 'fluture';
 
-// _setAttr :: String -> DOM Element -> Future Error String
+/*
+ * @sig String -> DOM Element -> Future DOM Element
+ */
 const _setAttr = curry((attr, val, el) => {
   el.setAttribute(attr, val);
   return of(el);
