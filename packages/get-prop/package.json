@@ -16,6 +16,7 @@
   "dependencies": {
     "fluture": "8.0.1",
     "ramda": "0.25.0",
+    "saladbar.hasprop": "^0.0.1",
     "saladbar.utils": "^0.0.1"
   },
   "scripts": {
