@@ -1,25 +1,35 @@
 {
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "cd packages/react-scripts && node bin/react-scripts.js build",
+    "build": "node bin/build.js",
     "changelog": "lerna-changelog",
     "start": "cd packages/react-scripts && node bin/react-scripts.js start",
     "test": "babel-tape-runner 'packages/**/*.test.js' | tap-spec",
     "eslint": "eslint 'packages/**/*.js'",
-    "format":
-      "prettier-eslint --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
+    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'",
     "precommit": "lint-staged"
   },
   "devDependencies": {
+    "chalk": "2.3.0",
     "eslint": "4.16.0",
     "eslint-config-prettier": "2.9.0",
+    "fluture": "8.0.1",
+    "fs-extra": "5.0.0",
+    "futurize": "1.2.0",
     "husky": "0.14.3",
     "lerna": "2.7.1",
     "lerna-changelog": "0.7.0",
     "lint-staged": "6.0.0",
     "prettier": "1.10.2",
-    "prettier-eslint-cli": "4.7.0"
+    "prettier-eslint-cli": "4.7.0",
+    "ramda": "0.25.0",
+    "rollup": "0.55.1",
+    "rollup-plugin-babel": "3.0.3",
+    "rollup-plugin-commonjs": "8.3.0",
+    "rollup-plugin-node-resolve": "3.0.2"
   },
   "lint-staged": {
     "*.js": [

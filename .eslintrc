@@ -4,7 +4,8 @@
   },
   "env": {
     "es6": true,
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "extends": ["eslint:all", "prettier"],
   "rules": {
@@ -12,6 +13,8 @@
     "no-ternary": 0,
     "no-prototype-builtins": 0,
     "no-underscore-dangle": 0,
+    "no-process-exit": 0,
+    "no-caplitalized-comments": 0,
     "no-unused-expressions": [
       "error",
       { "allowShortCircuit": true, "allowTernary": true }
