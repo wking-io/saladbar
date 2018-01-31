@@ -7,7 +7,8 @@
     "browser": true,
     "node": true
   },
-  "extends": ["eslint:all", "prettier"],
+  "extends": ["eslint:all", "prettier", "plugin:import/recommended"],
+  "plugins": ["import"],
   "rules": {
     "one-var": ["error", { "var": "always", "let": "never", "const": "never" }],
     "no-ternary": 0,
@@ -18,6 +19,13 @@
     "no-unused-expressions": [
       "error",
       { "allowShortCircuit": true, "allowTernary": true }
-    ]
+    ],
+    "sort-imports": 0,
+    "import/first": 2,
+    "import/exports-last": 2,
+    "import/no-duplicates": 2,
+    "import/order": 2,
+    "import/newline-after-import": 2,
+    "import/prefer-default-export": 2
   }
 }
