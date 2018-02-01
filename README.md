@@ -35,8 +35,8 @@ hasClassTest('.default').run(console.error, console.log);
 The `package.json` sets a `module`-field for build-tools like [Rollup][].
 
 ```js
-const { compose } from 'ramda';
-var { dom, hasClass } from 'saladbar';
+import { compose } from 'ramda';
+import { dom, hasClass } from 'saladbar';
 
 // Given this html
 // <div class="default test"></div>
