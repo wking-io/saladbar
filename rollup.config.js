@@ -52,7 +52,7 @@ export default [
         exclude: 'node_modules/**',
         presets: babelrc,
       }),
-      uglify(),
+      // Uglify(),
     ],
   },
   {
@@ -71,7 +71,7 @@ export default [
         exclude: 'node_modules/**',
         presets: babelrc,
       }),
-      uglify(),
+      // Uglify(),
     ],
   },
 ];
