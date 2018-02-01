@@ -1,0 +1,5 @@
+src/
+.eslintrc
+.eslintignore
+.babelrc
+rollup.config.js
