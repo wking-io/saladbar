@@ -3,13 +3,7 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import includePaths from 'rollup-plugin-includepaths';
 import node from 'rollup-plugin-node-resolve';
-import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
-
-const dependencies = {
-  fluture: 'Future',
-  ramda: 'R',
-};
 
 const babelrc = {
   presets: [
@@ -52,11 +46,10 @@ export default [
         exclude: 'node_modules/**',
         presets: babelrc,
       }),
-      // Uglify(),
     ],
   },
   {
-    external: Object.keys(dependencies),
+    external: Object.keys(pkg.dependencies),
     input: 'src/index.js',
     output: [
       { file: pkg.main, format: 'cjs' },
@@ -71,7 +64,6 @@ export default [
         exclude: 'node_modules/**',
         presets: babelrc,
       }),
-      // Uglify(),
     ],
   },
 ];
