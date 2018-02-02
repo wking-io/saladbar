@@ -1,6 +1,6 @@
 {
   "name": "saladbar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Library of composable dom functions.",
   "main": "lib/bundle.umd.js",
   "module": "lib/bundle.esm.js",
@@ -39,11 +39,9 @@
   "scripts": {
     "build": "rollup -c",
     "eslint": "eslint 'src/**/*.js'",
-    "format":
-      "prettier-eslint --trailing-comma es5 --single-quote --write 'src/*/*.js'",
+    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'src/*/*.js'",
     "precommit": "lint-staged",
-    "prepublishOnly":
-      "rollup -c && babel-tape-runner __tests__/*.test.js | tap-spec",
+    "prepublishOnly": "rollup -c && babel-tape-runner __tests__/*.test.js | tap-spec",
     "test": "babel-tape-runner src/__tests__/*.test.js | tap-spec",
     "test:bundle": "babel-tape-runner __tests__/*.test.js | tap-spec"
   },
