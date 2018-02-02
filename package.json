@@ -2,9 +2,8 @@
   "name": "saladbar",
   "version": "0.0.2",
   "description": "Library of composable dom functions.",
-  "main": "lib/bundle.cjs.js",
+  "main": "lib/bundle.umd.js",
   "module": "lib/bundle.esm.js",
-  "browser": "lib/bundle.js",
   "repository": "https://github.com/wking-io/salad-bar",
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "license": "Apache-2.0",
@@ -38,11 +37,15 @@
     "ramda": "0.25.0"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js",
+    "build": "rollup -c",
     "eslint": "eslint 'src/**/*.js'",
-    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'src/*/*.js'",
+    "format":
+      "prettier-eslint --trailing-comma es5 --single-quote --write 'src/*/*.js'",
     "precommit": "lint-staged",
-    "test": "babel-tape-runner src/**/*.test.js | tap-spec"
+    "prepublishOnly":
+      "rollup -c && babel-tape-runner __tests__/*.test.js | tap-spec",
+    "test": "babel-tape-runner src/__tests__/*.test.js | tap-spec",
+    "test:bundle": "babel-tape-runner __tests__/*.test.js | tap-spec"
   },
   "lint-staged": {
     "*.js": [

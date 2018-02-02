@@ -3,6 +3,7 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import includePaths from 'rollup-plugin-includepaths';
 import node from 'rollup-plugin-node-resolve';
+import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
 const babelrc = {
@@ -27,9 +28,9 @@ export default [
     input: 'src/index.js',
     output: {
       banner,
-      file: pkg.browser,
+      file: 'lib/bundle.js',
       format: 'iife',
-      name: 'saladbar',
+      name: pkg.name,
     },
     plugins: [
       node({
@@ -46,15 +47,18 @@ export default [
         exclude: 'node_modules/**',
         presets: babelrc,
       }),
+      uglify(),
     ],
   },
   {
     external: Object.keys(pkg.dependencies),
     input: 'src/index.js',
-    output: [
-      { file: pkg.main, format: 'cjs' },
-      { file: pkg.module, format: 'es' },
-    ],
+    output: {
+      file: pkg.main,
+      format: 'umd',
+      name: pkg.name,
+      globals: pkg.dependencies,
+    },
     plugins: [
       includePaths({
         paths: ['src'],
@@ -64,6 +68,26 @@ export default [
         exclude: 'node_modules/**',
         presets: babelrc,
       }),
+      uglify(),
+    ],
+  },
+  {
+    external: Object.keys(pkg.dependencies),
+    input: 'src/index.esm.js',
+    output: {
+      file: pkg.module,
+      format: 'es',
+    },
+    plugins: [
+      includePaths({
+        paths: ['src'],
+      }),
+      babel({
+        babelrc: false,
+        exclude: 'node_modules/**',
+        presets: babelrc,
+      }),
+      uglify(),
     ],
   },
 ];
