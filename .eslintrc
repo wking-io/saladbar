@@ -10,7 +10,9 @@
   "extends": ["eslint:all", "prettier", "plugin:import/recommended"],
   "plugins": ["import"],
   "rules": {
+    "id-length": 0,
     "one-var": ["error", { "var": "always", "let": "never", "const": "never" }],
+    "new-cap": 0,
     "no-ternary": 0,
     "no-prototype-builtins": 0,
     "no-underscore-dangle": 0,
