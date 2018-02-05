@@ -9,7 +9,6 @@ import hasAttr from './has-attr';
 import hasClass from './has-class';
 import hasData from './has-data';
 import hasProp from './has-prop';
-import { getJson, postJson } from './json-requests';
 import removeAttr from './remove-attr';
 import removeClass from './remove-class';
 import removeData from './remove-data';
@@ -26,13 +25,11 @@ export {
   domAll,
   getAttr,
   getData,
-  getJson,
   getProp,
   hasAttr,
   hasClass,
   hasData,
   hasProp,
-  postJson,
   removeAttr,
   removeClass,
   removeData,
