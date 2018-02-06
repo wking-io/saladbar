@@ -10,7 +10,10 @@ test('getProp returns value of property on single element', assert => {
   const testEl = document.querySelector('.default');
   const actual = getProp('innerHTML', testEl);
   const expected = 'Hello!';
-  assert.equal(actual, expected);
+  actual.fork(
+    () => assert.fail('getProp returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 
@@ -19,7 +22,10 @@ test('getProp returns error if property not found on single element', assert => 
   const testEl = document.querySelector('.default');
   const actual = getProp('not-real', testEl);
   const expected = true;
-  assert.equal(actual.hasOwnProperty('error'), expected);
+  actual.fork(
+    err => assert.equal(err.hasOwnProperty('error'), expected),
+    () => assert.fail('getProp did not return an error.')
+  );
   assert.end();
 });
 

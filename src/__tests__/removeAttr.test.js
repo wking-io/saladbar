@@ -15,7 +15,10 @@ test('removeAttr removes attribute on single element', assert => {
   const testEl = document.querySelector('.default');
   const actual = compose(hasAttr('aria-expanded'), removeAttr('aria-expanded'));
   const expected = false;
-  assert.equal(actual(testEl), expected);
+  actual(testEl).fork(
+    () => assert.fail('removeAttr returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 
@@ -27,7 +30,10 @@ test('removeAttr does not return error if attribute not found on single element'
   const testEl = document.querySelector('.default');
   const actual = compose(hasAttr('not-real'), removeAttr('not-real'));
   const expected = false;
-  assert.equal(actual(testEl), expected);
+  actual(testEl).fork(
+    () => assert.fail('removeAttr returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 

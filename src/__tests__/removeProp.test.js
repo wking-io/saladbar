@@ -20,7 +20,10 @@ test('removeProp removes property on single element', assert => {
     getProp('dataset')
   );
   const expected = false;
-  assert.equal(actual(testEl), expected);
+  actual(testEl).fork(
+    () => assert.fail('removeProp returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 
@@ -36,7 +39,10 @@ test('removeProp does not return an error if property does not exist on single e
     getProp('dataset')
   );
   const expected = true;
-  assert.equal(actual(testEl), expected);
+  actual(testEl).fork(
+    () => assert.fail('removeProp returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 

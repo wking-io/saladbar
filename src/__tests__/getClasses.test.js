@@ -10,7 +10,10 @@ test('getClasses returns object of classes with all classes that exist on elemen
   const testEl = document.querySelector('.default');
   const result = getClasses(testEl);
   const expected = 2;
-  assert.equal(result.length, expected);
+  result.fork(
+    () => assert.fail(),
+    actual => assert.equal(actual.length, expected)
+  );
   assert.end();
 });
 
@@ -19,7 +22,11 @@ test('getClasses returns error if no classes found on element', assert => {
   const testEl = document.querySelector('#default');
   const result = getClasses(testEl);
   const expected = true;
-  assert.equal(result.hasOwnProperty('error'), expected);
+  result.fork(
+    err => assert.equal(err.hasOwnProperty('error'), expected),
+    () =>
+      assert.fail('getClasses did not return errror when there are no classes.')
+  );
   assert.end();
 });
 

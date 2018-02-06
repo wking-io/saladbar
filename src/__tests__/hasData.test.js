@@ -13,7 +13,7 @@ test('hasData returns true when data attribute exists on an element', assert => 
   const testEl = document.querySelector('.default');
   const result = hasData('test', testEl);
   const expected = true;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 
@@ -25,7 +25,7 @@ test('hasData returns false when data attribute does not exists on an element', 
   const testEl = document.querySelector('.default');
   const result = hasData('not-real', testEl);
   const expected = false;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 

@@ -13,7 +13,7 @@ test('hasProp returns true when property exists on an element', assert => {
   const testEl = document.querySelector('.default');
   const result = hasProp('classList', testEl);
   const expected = true;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 
@@ -25,7 +25,7 @@ test('hasProp returns false when property does not exists on an element', assert
   const testEl = document.querySelector('.default');
   const result = hasProp('not-real', testEl);
   const expected = false;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 

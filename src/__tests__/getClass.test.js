@@ -10,7 +10,7 @@ test('getClass returns class at index when class exists at that index', assert =
   const testEl = document.querySelector('.default');
   const result = getClass(0, testEl);
   const expected = 'default';
-  assert.equal(result, expected);
+  result.fork(() => assert.fail(), actual => assert.equal(actual, expected));
   assert.end();
 });
 
@@ -19,7 +19,11 @@ test('getClass returns error when class does not exists at index', assert => {
   const testEl = document.querySelector('.default');
   const result = getClass(1, testEl);
   const expected = true;
-  assert.equal(result.hasOwnProperty('error'), expected);
+  result.fork(
+    err => assert.equal(err.hasOwnProperty('error'), expected),
+    () =>
+      assert.fail('getClass did not return errror when index does not exist')
+  );
   assert.end();
 });
 

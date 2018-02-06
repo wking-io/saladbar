@@ -13,7 +13,7 @@ test('hasAttr returns true when attribute exists on an element', assert => {
   const testEl = document.querySelector('.default');
   const result = hasAttr('aria-expanded', testEl);
   const expected = true;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 
@@ -25,7 +25,7 @@ test('hasAttr returns false when attribute does not exists on an element', asser
   const testEl = document.querySelector('.default');
   const result = hasAttr('not-real', testEl);
   const expected = false;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 

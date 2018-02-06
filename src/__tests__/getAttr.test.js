@@ -13,7 +13,10 @@ test('getAttr returns value of attribute on single element', assert => {
   const testEl = document.querySelector('.default');
   const actual = getAttr('aria-expanded', testEl);
   const expected = 'false';
-  assert.equal(actual, expected);
+  actual.fork(
+    () => assert.fail('getAttr returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 
@@ -25,7 +28,10 @@ test('getAttr returns error if attribute not found on single element', assert =>
   const testEl = document.querySelector('.default');
   const actual = getAttr('not-real', testEl);
   const expected = true;
-  assert.equal(actual.hasOwnProperty('error'), expected);
+  actual.fork(
+    err => assert.equal(err.hasOwnProperty('error'), expected),
+    () => assert.fail('getAttr did not return an error.')
+  );
   assert.end();
 });
 

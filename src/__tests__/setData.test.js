@@ -15,7 +15,7 @@ test('setData sets value of data property on single element', assert => {
   const testEl = document.querySelector('.default');
   const actual = compose(getData('test'), setData('test', 'false'));
   const expected = 'false';
-  assert.equal(actual(testEl), expected);
+  actual(testEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
@@ -24,7 +24,7 @@ test('setData creates new data property if property not found on single element'
   const testEl = document.querySelector('.default');
   const actual = compose(getData('notReal'), setData('notReal', 'false'));
   const expected = 'false';
-  assert.equal(actual(testEl), expected);
+  actual(testEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
@@ -33,35 +33,38 @@ test('setData returns error if data property is not a valid property name on sin
   const testEl = document.querySelector('.default');
   const actual = setData('_notreal_', 'false', testEl);
   const expected = true;
-  assert.equal(actual.hasOwnProperty('error'), expected);
+  actual.fork(
+    err => assert.equal(err.hasOwnProperty('error'), expected),
+    () => assert.fail('setData passed with invalid property name.')
+  );
   assert.end();
 });
 
-test('setData creates new data property if property not found on future element', assert => {
+test('setData sets value of data property on future element', assert => {
   const document = createElement(1, {
     attrs: ['data-test="true"'],
     classes: 'default',
   });
-  const testEl = of(document.querySelector('.default'));
+  const futureEl = of(document.querySelector('.default'));
   const actual = compose(getData('test'), setData('test', 'false'));
   const expected = 'false';
-  actual(testEl).value(attr => assert.equal(attr, expected));
+  actual(futureEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
 test('setData creates new data property if property not found on future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const testEl = of(document.querySelector('.default'));
+  const futureEl = of(document.querySelector('.default'));
   const actual = compose(getData('notReal'), setData('notReal', 'false'));
   const expected = 'false';
-  actual(testEl).value(attr => assert.equal(attr, expected));
+  actual(futureEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
 test('setData returns error if data property is not a valid property name on future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const testEl = of(document.querySelector('.default'));
-  const actual = setData('_notreal_', 'false', testEl);
+  const futureEl = of(document.querySelector('.default'));
+  const actual = setData('_notreal_', 'false', futureEl);
   const expected = true;
   actual.fork(
     err => assert.equal(err.hasOwnProperty('error'), expected),

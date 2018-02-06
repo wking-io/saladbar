@@ -18,7 +18,7 @@ test('setAttr sets value of attribute on single element', assert => {
     setAttr('aria-expanded', 'true')
   );
   const expected = 'true';
-  assert.equal(actual(testEl), expected);
+  actual(testEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
@@ -30,7 +30,7 @@ test('setAttr creates new attr if attribute not found on single element', assert
   const testEl = document.querySelector('.default');
   const actual = compose(getAttr('not-real'), setAttr('not-real', 'false'));
   const expected = 'false';
-  assert.equal(actual(testEl), expected);
+  actual(testEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
@@ -39,13 +39,13 @@ test('setAttr sets value of attribute on future element', assert => {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const testEl = of(document.querySelector('.default'));
+  const futureEl = of(document.querySelector('.default'));
   const actual = compose(
     getAttr('aria-expanded'),
     setAttr('aria-expanded', 'true')
   );
   const expected = 'true';
-  actual(testEl).value(attr => assert.equal(attr, expected));
+  actual(futureEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });
 
@@ -54,9 +54,9 @@ test('setAttr creates new attr if attribute not found on future element', assert
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const testEl = of(document.querySelector('.default'));
+  const futureEl = of(document.querySelector('.default'));
   const actual = compose(getAttr('not-real'), setAttr('not-real', 'false'));
   const expected = 'false';
-  actual(testEl).value(attr => assert.equal(attr, expected));
+  actual(futureEl).value(attr => assert.equal(attr, expected));
   assert.end();
 });

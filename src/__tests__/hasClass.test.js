@@ -10,7 +10,7 @@ test('hasClass returns true when class exists on an element', assert => {
   const testEl = document.querySelector('.default');
   const result = hasClass('default', testEl);
   const expected = true;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 
@@ -19,7 +19,7 @@ test('hasClass returns false when class does not exists on an element', assert =
   const testEl = document.querySelector('.default');
   const result = hasClass('not-real', testEl);
   const expected = false;
-  assert.equal(result, expected);
+  result.value(bool => assert.equal(bool, expected));
   assert.end();
 });
 

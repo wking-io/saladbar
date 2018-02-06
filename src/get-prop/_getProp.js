@@ -3,12 +3,13 @@ import { curry } from 'ramda';
 import hasProp from '../has-prop';
 
 // _getAttr :: String -> DOM Element -> Future Error String
-const _getAttr = curry((prop, el) => {
-  if (hasProp(prop, el)) {
-    return of(el[prop]);
-  }
+const _getProp = curry((prop, el) =>
+  hasProp(prop, el).chain(
+    propExists =>
+      propExists
+        ? of(el[prop])
+        : reject({ error: `Sorry, ${prop} was not found.` })
+  )
+);
 
-  return reject({ error: `Sorry, ${prop} was not found.` });
-});
-
-export default _getAttr;
+export default _getProp;

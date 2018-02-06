@@ -15,7 +15,10 @@ test('removeData removes data attribute on single element', assert => {
   const testEl = document.querySelector('.default');
   const actual = compose(hasData('test'), removeData('test'));
   const expected = false;
-  assert.equal(actual(testEl), expected);
+  actual(testEl).fork(
+    () => assert.fail('removeData returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 
@@ -27,7 +30,10 @@ test('removeData does not return error if data attribute does not exist on singl
   const testEl = document.querySelector('.default');
   const actual = compose(hasData('test'), removeData('not-real'));
   const expected = true;
-  assert.equal(actual(testEl), expected);
+  actual(testEl).fork(
+    () => assert.fail('removeData returned an error.'),
+    attr => assert.equal(attr, expected)
+  );
   assert.end();
 });
 
