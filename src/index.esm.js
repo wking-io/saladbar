@@ -3,6 +3,8 @@ import classList from './class-list';
 import dom from './dom';
 import domAll from './dom-all';
 import getAttr from './get-attr';
+import getClass from './get-class';
+import getClasses from './get-classes';
 import getData from './get-data';
 import getProp from './get-prop';
 import hasAttr from './has-attr';
@@ -26,6 +28,8 @@ export {
   dom,
   domAll,
   getAttr,
+  getClass,
+  getClasses,
   getData,
   getProp,
   hasAttr,
