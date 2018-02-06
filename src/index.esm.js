@@ -18,6 +18,8 @@ import setData from './set-data';
 import setProp from './set-prop';
 import toggleClass from './toggle-class';
 
+const noop = () => {}; // eslint-disable-line no-empty-function
+
 export {
   addClass,
   classList,
@@ -30,6 +32,7 @@ export {
   hasClass,
   hasData,
   hasProp,
+  noop,
   removeAttr,
   removeClass,
   removeData,
