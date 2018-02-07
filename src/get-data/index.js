@@ -1,8 +1,7 @@
-import { compose, curry } from 'ramda';
-import getProp from '../get-prop';
+import { curry } from 'ramda';
+import branch from '../utils/branch';
+import _getData from './_getData';
 
-const getData = curry((prop, el) =>
-  compose(getProp(prop), getProp('dataset'))(el)
-);
+const getData = curry((prop, el) => branch(_getData(prop))(el));
 
 export default getData;

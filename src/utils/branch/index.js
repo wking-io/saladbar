@@ -1,12 +1,9 @@
-import { chain, curry } from 'ramda';
-import { isFuture, of } from 'fluture';
+import { chain, compose, curry } from 'ramda';
+import guaranteeFuture from '../guaranteeFuture';
 import _branch from './_branch';
 
-const branch = curry((fn, el) => {
-  if (isFuture(el)) {
-    return chain(_branch(fn))(el);
-  }
-  return chain(_branch(fn))(of(el));
-});
+const branch = curry((fn, el) =>
+  compose(chain(_branch(fn)), guaranteeFuture)(el)
+);
 
 export default branch;
