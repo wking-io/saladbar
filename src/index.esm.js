@@ -14,7 +14,7 @@ import hasProp from './has-prop';
 import removeAttr from './remove-attr';
 import removeClass from './remove-class';
 import removeData from './remove-data';
-import removeProp from './remove-prop';
+import serialize from './serialize';
 import setAttr from './set-attr';
 import setData from './set-data';
 import setProp from './set-prop';
@@ -40,7 +40,7 @@ export {
   removeAttr,
   removeClass,
   removeData,
-  removeProp,
+  serialize,
   setAttr,
   setData,
   setProp,

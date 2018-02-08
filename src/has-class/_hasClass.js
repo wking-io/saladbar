@@ -1,17 +1,11 @@
-import { of, reject } from 'fluture';
 import { curry } from 'ramda';
-import isElmNode from '../utils/is-elm-node';
+import { of } from 'fluture';
 
 /*
  * @sig String -> DOM Element -> Future e Bool
  */
-const _hasClass = curry(
-  (classname, el) =>
-    isElmNode(el)
-      ? of(el.classList.contains(classname))
-      : reject({
-          error: `${el} is not a DOM Element so it does not have a classList method.`,
-        })
+const _hasClass = curry((classname, el) =>
+  of(el.classList.contains(classname))
 );
 
 export default _hasClass;

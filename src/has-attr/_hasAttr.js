@@ -1,15 +1,7 @@
-import { of, reject } from 'fluture';
 import { curry } from 'ramda';
-import isElmNode from '../utils/is-elm-node';
+import { of } from 'fluture';
 
 // _hasAttr :: String -> DOM Element -> Future e Bool
-const _hasAttr = curry(
-  (attr, el) =>
-    isElmNode(el)
-      ? of(el.hasAttribute(attr))
-      : reject({
-          error: `${el} is not a DOM Element so it does not have a hasAttribute method.`,
-        })
-);
+const _hasAttr = curry((attr, el) => of(el.hasAttribute(attr)));
 
 export default _hasAttr;
