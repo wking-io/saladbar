@@ -16,12 +16,12 @@ const createElement = (
   } = {}
 ) =>
   JSDOM.fragment(
-    `<div class="wrapper">${newElement(count, {
+    `<body><div class="wrapper">${newElement(count, {
       attrs,
       classes,
       id,
       styles,
-    })}</div>`
+    })}</div></body>`
   );
 
 export default createElement;
