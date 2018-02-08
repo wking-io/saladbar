@@ -1,6 +1,6 @@
 import { of } from 'fluture';
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import hasClass from '../has-class';
 
 test('hasClass returns true when class exists on an element', assert => {

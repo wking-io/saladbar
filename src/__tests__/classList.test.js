@@ -1,7 +1,7 @@
 import { of } from 'fluture';
 import test from 'tape';
 import classList from '../class-list';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 
 test('classList adds single class to an element', assert => {
   const document = createElement(1, { classes: 'default' });

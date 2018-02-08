@@ -1,6 +1,6 @@
 import { of } from 'fluture';
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import guaranteeFuture from '../utils/guaranteeFuture';
 
 test('guaranteeFuture just returns the input if it is a Future', assert => {

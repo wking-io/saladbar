@@ -1,7 +1,7 @@
 import { compose } from 'ramda';
 import { of } from 'fluture';
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import getAttr from '../get-attr';
 import setAttr from '../set-attr';
 

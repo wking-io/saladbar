@@ -1,5 +1,5 @@
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import isElmNode from '../utils/is-elm-node';
 import dom from '../dom';
 

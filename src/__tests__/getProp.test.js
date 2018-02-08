@@ -1,6 +1,6 @@
 import { of } from 'fluture';
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import getProp from '../get-prop';
 
 test('getProp returns value of property on single element', assert => {

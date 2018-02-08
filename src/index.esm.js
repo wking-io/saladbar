@@ -2,6 +2,7 @@ import addClass from './add-class';
 import classList from './class-list';
 import dom from './dom';
 import domAll from './dom-all';
+import findParent from './find-parent';
 import getAttr from './get-attr';
 import getClass from './get-class';
 import getClasses from './get-classes';
@@ -21,12 +22,14 @@ import setProp from './set-prop';
 import toggleClass from './toggle-class';
 
 const noop = () => {}; // eslint-disable-line no-empty-function
+const globalFindParent = findParent();
 
 export {
   addClass,
   classList,
   dom,
   domAll,
+  globalFindParent as findParent,
   getAttr,
   getClass,
   getClasses,

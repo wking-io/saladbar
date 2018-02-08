@@ -1,6 +1,6 @@
 import { of } from 'fluture';
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import getClass from '../get-class';
 
 test('getClass returns class at index when class exists at that index', assert => {

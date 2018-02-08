@@ -1,7 +1,7 @@
 import { of } from 'fluture';
 import test from 'tape';
 import branch from '../utils/branch';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 
 test('branch takes in non future value wraps it in future and evaluates value successfully', assert => {
   const document = createElement(1, { classes: 'default' });

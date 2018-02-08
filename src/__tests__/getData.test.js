@@ -1,6 +1,6 @@
 import { of } from 'fluture';
 import test from 'tape';
-import createElement from '../utils/element';
+import createElement from '../utils/create/createElement';
 import getData from '../get-data';
 
 test('getData returns value of data attribute on single element', assert => {

@@ -1,6 +1,6 @@
 import { of } from 'fluture';
 import test from 'tape';
-import createForm from '../utils/form';
+import createForm from '../utils/create/createForm';
 import serialize from '../serialize';
 
 const expectedData = {
