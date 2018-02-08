@@ -22,6 +22,7 @@
       "error",
       { "allowShortCircuit": true, "allowTernary": true }
     ],
+    "no-magic-numbers": 0,
     "sort-imports": 0,
     "import/first": 2,
     "import/exports-last": 2,

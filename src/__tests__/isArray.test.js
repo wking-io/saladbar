@@ -1,5 +1,3 @@
-/* eslint no-magic-numbers: 0 */
-
 import test from 'tape';
 import isArray from '../utils/is-array';
 

@@ -1,5 +1,3 @@
-/* eslint no-magic-numbers: 0 */
-
 import { of } from 'fluture';
 import test from 'tape';
 import createElement from '../utils/element';

@@ -1,5 +1,3 @@
-/* eslint no-magic-numbers: 0 */
-
 import { compose } from 'ramda';
 import { of } from 'fluture';
 import test from 'tape';
