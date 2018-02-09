@@ -1,6 +1,3 @@
-const elNodeType = 1;
-const formNodeName = 'FORM';
-const isFormNode = el =>
-  el && el.nodeType === elNodeType && el.nodeName === formNodeName;
+const isFormNode = el => el && el.nodeType === 1 && el.nodeName === 'FORM';
 
 export default isFormNode;

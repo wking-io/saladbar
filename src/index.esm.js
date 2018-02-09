@@ -3,6 +3,7 @@ import classList from './class-list';
 import dom from './dom';
 import domAll from './dom-all';
 import findParent from './find-parent';
+import fork from './fork';
 import getAttr from './get-attr';
 import getClass from './get-class';
 import getClasses from './get-classes';
@@ -30,6 +31,7 @@ export {
   dom,
   domAll,
   globalFindParent as findParent,
+  fork,
   getAttr,
   getClass,
   getClasses,

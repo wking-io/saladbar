@@ -14,7 +14,7 @@ const isValidDataProp = prop => {
   const isMatch = prop.match(validDataRegex);
   return isMatch && isMatch.length === onlyOne;
 };
-const _setData = curry((prop, val, el) => {
+const _setData = (prop, val, el) => {
   if (isValidDataProp(prop)) {
     el.dataset[prop] = val;
     return of(el);
@@ -23,6 +23,6 @@ const _setData = curry((prop, val, el) => {
   return reject({
     error: `Data property ${prop} is not a valid property name`,
   });
-});
+};
 
-export default _setData;
+export default curry(_setData);

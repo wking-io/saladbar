@@ -4,8 +4,6 @@ import { of } from 'fluture';
 /*
  * @sig String -> DOM Element -> Future e Bool
  */
-const _hasClass = curry((classname, el) =>
-  of(el.classList.contains(classname))
-);
+const _hasClass = (classname, el) => of(el.classList.contains(classname));
 
-export default _hasClass;
+export default curry(_hasClass);

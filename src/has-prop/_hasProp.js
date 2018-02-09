@@ -4,6 +4,6 @@ import { of } from 'fluture';
 /* 
  * @sig String -> DOM Element -> Future Bool
  */
-const _hasProp = curry((prop, el) => of(prop in el));
+const _hasProp = (prop, el) => of(prop in el);
 
-export default _hasProp;
+export default curry(_hasProp);

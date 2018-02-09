@@ -2,6 +2,6 @@ import { curry } from 'ramda';
 import branch from '../utils/branch';
 import _hasData from './_hasData';
 
-const hasData = curry((prop, el) => branch(_hasData(prop))(el));
+const hasData = (prop, el) => branch(_hasData(prop))(el);
 
-export default hasData;
+export default curry(hasData);

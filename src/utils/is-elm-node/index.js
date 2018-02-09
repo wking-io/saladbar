@@ -1,4 +1,3 @@
-const elNodeType = 1;
-const isElmNode = el => el && el.nodeType === elNodeType;
+const isElmNode = el => el && el.nodeType === 1;
 
 export default isElmNode;

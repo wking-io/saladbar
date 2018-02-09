@@ -4,9 +4,9 @@ import { of } from 'fluture';
 /*
  * @sig String -> DOM Element -> Future Error String
  */
-const _removeAttr = curry((attr, el) => {
+const _removeAttr = (attr, el) => {
   el.removeAttribute(attr);
   return of(el);
-});
+};
 
-export default _removeAttr;
+export default curry(_removeAttr);
