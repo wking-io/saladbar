@@ -1,6 +1,6 @@
 {
   "name": "saladbar",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Library of composable dom functions.",
   "main": "lib/bundle.umd.js",
   "module": "lib/bundle.esm.js",
