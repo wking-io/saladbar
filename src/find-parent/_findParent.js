@@ -2,7 +2,8 @@ import { curry, ifElse, identity, chain, compose } from 'ramda';
 import { of, isFuture } from 'fluture';
 
 const _findParent = (pred, dom, el) => {
-  if (el === dom.body) {
+  const doc = dom ? dom : document;
+  if (el === doc.body) {
     return of(el);
   }
 
