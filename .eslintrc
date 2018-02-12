@@ -10,8 +10,10 @@
   "extends": ["eslint:all", "prettier", "plugin:import/recommended"],
   "plugins": ["import"],
   "rules": {
+    "capitalized-comments": 0,
     "id-length": 0,
     "one-var": ["error", { "var": "always", "let": "never", "const": "never" }],
+    "multiline-comment-style": 0,
     "new-cap": 0,
     "no-ternary": 0,
     "no-prototype-builtins": 0,
