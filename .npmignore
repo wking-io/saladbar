@@ -1,7 +1,0 @@
-src/
-.eslintrc
-.eslintignore
-.babelrc
-rollup.config.js
-lib/bundle.js
-__tests__/

@@ -1,0 +1,13 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["import"],
+  "extends": ["eslint:recommended", "prettier", "plugin:import/errors"],
+  "rules": {
+    "prefer-arrow-callback": 2
+  }
+}
