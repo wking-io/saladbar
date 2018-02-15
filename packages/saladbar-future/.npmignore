@@ -1,3 +1,4 @@
 rollup.config.js
 tools
 modules/
+lib/umd
