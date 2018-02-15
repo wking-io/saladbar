@@ -2,21 +2,7 @@
   "private": true,
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "node bin/build-packages.js",
-    "build:core":
-      "node bin/build-package.js packages/node_modules/saladbar-core",
-    "build:future":
-      "node bin/build-package.js packages/node_modules/saladbar-future",
-    "build:utils":
-      "node bin/build-package.js packages/node_modules/saladbar-utils",
-    "eslint": "eslint 'src/**/*.js'",
-    "format":
-      "prettier-eslint --trailing-comma es5 --single-quote --write 'src/*/*.js'",
-    "precommit": "lint-staged",
-    "prepublishOnly":
-      "rollup -c && babel-tape-runner __tests__/*.test.js | tap-spec",
-    "test": "babel-tape-runner src/__tests__/*.test.js | tap-spec",
-    "test:bundle": "babel-tape-runner __tests__/*.test.js | tap-spec"
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
