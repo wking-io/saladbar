@@ -1,0 +1,27 @@
+{
+  "name": "saladbar-core",
+  "version": "0.0.1",
+  "description": "Core helper functions for building composable dom functions.",
+  "main": "index.js",
+  "keywords": [],
+  "module": "es/index.js",
+  "repository": "https://github.com/wking-io/saladbar",
+  "author": "Will King <contact@wking.io> (https://www.wking.io/)",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "node ./tools/build.js",
+    "watch": "babel ./modules -d . --ignore __tests__ --watch",
+    "prepublishOnly": "node ./tools/build.js",
+    "clean": "git clean -fdX .",
+    "lint": "eslint modules/**/*.js",
+    "format":
+      "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
+    "test": "babel-tape-runner modules/__tests__/*.test.js | tap-spec"
+  },
+  "dependencies": {
+    "ramda": "0.25.0"
+  },
+  "globals": {
+    "ramda": "R"
+  }
+}

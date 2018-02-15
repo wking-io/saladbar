@@ -1,0 +1,1 @@
+var isArray=function(r){return Array.isArray(r)},isElmNode=function(r){return r&&1===r.nodeType},isFormNode=function(r){return r&&1===r.nodeType&&"FORM"===r.nodeName};export{isArray,isElmNode,isFormNode};

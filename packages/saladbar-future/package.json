@@ -1,0 +1,21 @@
+{
+  "name": "saladbar-future",
+  "version": "0.0.1",
+  "description": "Library of safe, composable dom functions.",
+  "main": "lib/index.js",
+  "keywords": [],
+  "module": "lib/index.es.js",
+  "repository": "https://github.com/wking-io/saladbar",
+  "author": "Will King <contact@wking.io> (https://www.wking.io/)",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "fluture": "8.0.1",
+    "ramda": "0.25.0",
+    "saladbar-core": "0.0.1"
+  },
+  "globals": {
+    "fluture": "Future",
+    "ramda": "R",
+    "saladbar-core": "saladbar-core"
+  }
+}

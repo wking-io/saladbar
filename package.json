@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "build": "node bin/build-packages.js",
-    "build:dist": "rollup -c rollup.dist.config.js",
+    "build:core": "node bin/build-package.js packages/node_modules/saladbar-core",
+    "build:future": "node bin/build-package.js packages/node_modules/saladbar-future",
+    "build:utils": "node bin/build-package.js packages/node_modules/saladbar-utils",
     "eslint": "eslint 'src/**/*.js'",
     "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'src/*/*.js'",
     "precommit": "lint-staged",
@@ -20,10 +22,6 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "fluture": "8.0.1",
-    "ramda": "0.25.0"
-  },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -36,6 +34,7 @@
     "fs-extra": "5.0.0",
     "husky": "0.14.3",
     "jsdom": "11.6.2",
+    "lerna": "2.8.0",
     "lint-staged": "6.1.0",
     "prettier": "1.10.2",
     "prettier-eslint-cli": "4.7.0",

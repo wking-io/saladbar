@@ -13,6 +13,7 @@
     "capitalized-comments": 0,
     "id-length": 0,
     "one-var": ["error", { "var": "always", "let": "never", "const": "never" }],
+    "max-params": 0,
     "multiline-comment-style": 0,
     "new-cap": 0,
     "no-ternary": 0,
@@ -31,6 +32,7 @@
     "import/no-duplicates": 2,
     "import/order": 2,
     "import/newline-after-import": 2,
-    "import/prefer-default-export": 2
+    "import/prefer-default-export": 2,
+    "import/unambiguous": 0
   }
 }

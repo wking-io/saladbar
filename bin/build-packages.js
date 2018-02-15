@@ -36,7 +36,9 @@ const buildModule = pkg => status =>
 
 // build :: String -> Future Error {k: v}
 const build = pkg =>
-  compose(chain(buildModule(pkg)), map(announceBuild(pkg)), getStatus)(pkg);
+  compose(chain(compose(buildModule(pkg))), map(announceBuild(pkg)), getStatus)(
+    pkg
+  );
 
 // Error -> ⚠️
 const stop = error => {
@@ -45,6 +47,10 @@ const stop = error => {
   process.exit(1);
 };
 
+const success = () => {
+  console.log(chalk.green('All packages have been built successfully!'));
+};
+
 readDir('packages/node_modules')
   .chain(traverse(of, build))
-  .fork(stop, console.log);
+  .fork(stop, success);
