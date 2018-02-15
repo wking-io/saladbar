@@ -1,4 +1,4 @@
-import { isElmNode } from 'saladbar-utils';
+import isElmNode from '../utils/is-elm-node';
 
 // _domAll :: (CSS Selector, DOM Element) -> [DOM Element] | Null
 const _domAll = (cs, root = false) => {

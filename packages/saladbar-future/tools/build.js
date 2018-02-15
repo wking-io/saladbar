@@ -21,20 +21,20 @@ exec('babel modules -d lib/es --ignore __tests__', {
   BABEL_ENV: 'es',
 });
 
-console.log('\nBuilding saladbar-core.js ...');
+console.log('\nBuilding saladbar-future.js ...');
 
-exec('rollup -c -f umd -n saladbarCore -o lib/umd/saladbar-core.js', {
+exec('rollup -c -f umd -n saladbarFuture -o lib/umd/saladbar-future.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'development',
 });
 
-console.log('\nBuilding saladbar-core.min.js ...');
+console.log('\nBuilding saladbar-future.min.js ...');
 
-exec('rollup -c -f umd -n saladbarCore -o lib/umd/saladbar-core.min.js', {
+exec('rollup -c -f umd -n saladbarFuture -o lib/umd/saladbar-future.min.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'production',
 });
 
-const size = gzipSize.sync(fs.readFileSync('lib/umd/saladbar-core.min.js'));
+const size = gzipSize.sync(fs.readFileSync('lib/umd/saladbar-future.min.js'));
 
 console.log('\ngzipped, the UMD build is %s', prettyBytes(size));

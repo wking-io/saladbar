@@ -10,12 +10,17 @@ const config = {
       exclude: 'node_modules/**',
     }),
     resolve({
+      module: true,
+      browser: true,
       customResolveOptions: {
         moduleDirectory: ['../../node_modules', '../'],
       },
     }),
     commonjs({
       include: /node_modules/,
+      namedExports: {
+        'fluture/index.js': ['isFuture', 'of', 'reject', 'Future'],
+      },
     }),
   ],
 };

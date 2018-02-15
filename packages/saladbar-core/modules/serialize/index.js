@@ -1,5 +1,5 @@
 import { curry } from 'ramda';
-import { isFormNode } from 'saladbar-utils';
+import isFormNode from '../utils/is-form-node';
 
 // prop :: k -> {k: v} -> v
 const prop = curry((p, obj) => obj[p]);

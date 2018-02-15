@@ -1,5 +1,5 @@
 import { curry } from 'ramda';
-import { isArray } from 'saladbar-utils';
+import isArray from '../utils/is-array';
 
 // _classList :: String -> String | [String] -> DOM Element -> DOM Element
 const _classList = (method, cn, dom) => {
