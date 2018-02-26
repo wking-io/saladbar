@@ -1,6 +1,6 @@
 {
   "name": "saladbar-core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core helper functions for building composable dom functions.",
   "main": "lib/cjs/index.js",
   "keywords": [],
@@ -14,8 +14,7 @@
     "prepublishOnly": "node ./tools/build.js && yarn test:build",
     "clean": "git clean -fdX .",
     "lint": "eslint modules/**/*.js",
-    "format":
-      "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
+    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
     "test": "babel-tape-runner modules/__tests__/*.test.js | tap-spec",
     "test:build": "babel-tape-runner __tests__/*.test.js | tap-spec"
   },
