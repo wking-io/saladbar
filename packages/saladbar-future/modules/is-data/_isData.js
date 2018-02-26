@@ -6,7 +6,7 @@ import { isData } from 'saladbar-core';
 const _isData = (prop, val, dom) => {
   const result = isData(prop, val, dom);
 
-  return result
+  return result !== null
     ? of(result)
     : reject({
         error: `There is not a data-attribute with the following name on this element: ${prop}`,

@@ -6,7 +6,7 @@ import { isProp } from 'saladbar-core';
 const _isProp = (prop, val, dom) => {
   const result = isProp(prop, val, dom);
 
-  return result
+  return result !== null
     ? of(result)
     : reject({
         error: `There is not a property with the following name on this element: ${prop}`,

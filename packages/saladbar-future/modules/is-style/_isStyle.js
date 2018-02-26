@@ -6,7 +6,7 @@ import { isStyle } from 'saladbar-core';
 const _isStyle = (prop, val, dom) => {
   const result = isStyle(prop, val, dom);
 
-  return result
+  return result !== null
     ? of(result)
     : reject({
         error: `There is not a style property with the following name on this element: ${prop}`,

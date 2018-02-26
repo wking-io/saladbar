@@ -2,7 +2,7 @@ import test from 'tape';
 import createElement from '../utils/create/createElement';
 import isAttr from '../is-attr';
 
-test('isProp returns true when property exists and the value matches on an element', assert => {
+test('isAttr returns true when property exists and the value matches on an element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
@@ -14,7 +14,7 @@ test('isProp returns true when property exists and the value matches on an eleme
   assert.end();
 });
 
-test('isProp returns false when property exists but the value does not match on an element', assert => {
+test('isAttr returns false when property exists but the value does not match on an element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
@@ -26,7 +26,7 @@ test('isProp returns false when property exists but the value does not match on 
   assert.end();
 });
 
-test('isProp returns null when property does not exist on an element', assert => {
+test('isAttr returns null when property does not exist on an element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
