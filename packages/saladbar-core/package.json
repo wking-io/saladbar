@@ -14,7 +14,8 @@
     "prepublishOnly": "node ./tools/build.js",
     "clean": "git clean -fdX .",
     "lint": "eslint modules/**/*.js",
-    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
+    "format":
+      "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
     "test": "babel-tape-runner modules/__tests__/*.test.js | tap-spec"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.1",
+    "babel-tape-runner": "2.0.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
     "gzip-size": "4.1.0",

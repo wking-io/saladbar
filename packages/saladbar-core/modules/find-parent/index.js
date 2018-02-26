@@ -10,7 +10,7 @@ const _findParent = (global = false, pred, dom) => {
 
   return pred(dom.parentElement)
     ? dom.parentElement
-    : _findParent(pred, doc, dom.parentElement);
+    : _findParent(doc, pred, dom.parentElement);
 };
 
 export default curry(_findParent);

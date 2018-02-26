@@ -3,26 +3,20 @@ import createElement from '../utils/create/createElement';
 import isElmNode from '../utils/is-elm-node';
 import dom from '../dom';
 
-test('dom returns a future that resolves to an element when element exists.', assert => {
+test('dom returns an element when element exists.', assert => {
   const document = createElement(1, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = dom('.default', root);
   const expected = true;
-  actual.fork(
-    err => assert.fail(err),
-    el => assert.equal(isElmNode(el), expected)
-  );
+  assert.equal(isElmNode(actual), expected);
   assert.end();
 });
 
-test('dom returns a future that resolves to an error when element does not exists.', assert => {
+test('dom returns null when element does not exists.', assert => {
   const document = createElement(1, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = dom('.not-real', root);
-  const expected = 'Element with selector .not-real not found.';
-  actual.fork(
-    err => assert.equal(err.error, expected),
-    () => assert.fail(`Element that did not exist returned a resolved future`)
-  );
+  const expected = null;
+  assert.equal(actual, expected);
   assert.end();
 });

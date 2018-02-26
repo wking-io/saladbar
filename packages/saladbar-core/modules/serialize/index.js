@@ -1,11 +1,16 @@
 import { curry } from 'ramda';
 import isFormNode from '../utils/is-form-node';
 
+const trace = val => {
+  console.log(val);
+  return val;
+};
+
 // prop :: k -> {k: v} -> v
 const prop = curry((p, obj) => obj[p]);
 // fromPairs :: [[k, v]] -> {k: v}
 const fromPairs = pairs =>
-  pairs.reduce((acc, [key, val]) => Object.assign(acc, { [key]: val }));
+  pairs.reduce((acc, [key, val]) => Object.assign(acc, { [key]: val }), {});
 // toArray :: Iter -> [*]
 const toArray = iter => Array.from(iter);
 // notSubmit :: DOM Element -> Bool

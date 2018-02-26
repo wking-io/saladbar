@@ -22,12 +22,12 @@ module.exports = {
     [
       'env',
       {
-        modules: false,
+        modules: BABEL_ENV ? false : 'commonjs',
         targets: {
           browsers: ['last 2 versions', 'safari >= 7'],
         },
       },
     ],
   ],
-  plugins: plugins,
+  plugins: BABEL_ENV ? plugins : '',
 };
