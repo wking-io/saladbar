@@ -11,7 +11,7 @@ test('hasClass returns true when class exists on an element', assert => {
   assert.end();
 });
 
-test('hasClass returns false when class does not exists on an element', assert => {
+test('hasClass returns false when class does not exist on an element', assert => {
   const document = createElement(1, { classes: 'default' });
   const testEl = document.querySelector('.default');
   const actual = hasClass('not-real', testEl);

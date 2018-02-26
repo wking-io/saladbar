@@ -14,7 +14,7 @@ test('hasProp returns true when property exists on an element', assert => {
   assert.end();
 });
 
-test('hasProp returns false when property does not exists on an element', assert => {
+test('hasProp returns false when property does not exist on an element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',

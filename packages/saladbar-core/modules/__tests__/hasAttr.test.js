@@ -14,7 +14,7 @@ test('hasAttr returns true when attribute exists on an element', assert => {
   assert.end();
 });
 
-test('hasAttr returns false when attribute does not exists on an element', assert => {
+test('hasAttr returns false when attribute does not exist on an element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
