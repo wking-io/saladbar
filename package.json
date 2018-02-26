@@ -6,7 +6,7 @@
     "release": "lerna run build && lerna publish"
   },
   "lint-staged": {
-    "*.js": [
+    "packages/**/modules/**/*.js": [
       "prettier-eslint --trailing-comma es5 --single-quote --write",
       "git add"
     ]
