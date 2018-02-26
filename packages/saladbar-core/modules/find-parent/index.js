@@ -1,6 +1,6 @@
 import { curry } from 'ramda';
 
-// _findParent :: DOM -> (DOM Element -> Bool) -> DOM Element -> DOM Element
+// _findParent :: DOM -> Bool -> DOM Element -> DOM Element
 const _findParent = (global = false, pred, dom) => {
   const doc = global ? global : window.document;
 

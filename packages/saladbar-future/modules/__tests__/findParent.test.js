@@ -14,7 +14,10 @@ test('findParent returns parent that matched the predicate on an element.', asse
     testFindParent(hasClass('wrapper'))
   )(testEl);
   const expected = true;
-  result.value(actual => assert.equal(actual, expected));
+  result.fork(
+    err => assert.fail(err),
+    actual => assert.equal(actual, expected)
+  );
   assert.end();
 });
 
@@ -27,7 +30,10 @@ test('findParent returns parent that matched the predicate on a future element.'
     testFindParent(hasClass('wrapper'))
   )(testEl);
   const expected = true;
-  result.value(actual => assert.equal(actual, expected));
+  result.fork(
+    err => assert.fail(err),
+    actual => assert.equal(actual, expected)
+  );
   assert.end();
 });
 
@@ -37,7 +43,10 @@ test('findParent returns body when passed an predicate that does not find a matc
   const testFindParent = findParent(document);
   const result = testFindParent(hasClass('not-real'))(testEl);
   const expected = document.body;
-  result.value(actual => assert.equal(actual.nodeName, expected.nodeName));
+  result.fork(
+    err => assert.fail(err),
+    actual => assert.equal(actual.nodeName, expected.nodeName)
+  );
   assert.end();
 });
 
@@ -47,6 +56,9 @@ test('findParent returns body when passed an predicate that does not find a matc
   const testFindParent = findParent(document);
   const result = testFindParent(hasClass('not-real'))(testEl);
   const expected = document.body;
-  result.value(actual => assert.equal(actual.nodeName, expected.nodeName));
+  result.fork(
+    err => assert.fail(err),
+    actual => assert.equal(actual.nodeName, expected.nodeName)
+  );
   assert.end();
 });

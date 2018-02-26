@@ -1,6 +1,5 @@
 import test from 'tape';
-
-const saladbar = require('../lib/bundle.umd');
+import * as saladbar from '../lib/es';
 
 const isFunction = func => typeof func === 'function';
 

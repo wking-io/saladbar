@@ -19,9 +19,9 @@ test('dom returns a future that resolves to an error when element does not exist
   const document = createElement(1, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = dom('.not-real', root);
-  const expected = 'Element with selector .not-real not found.';
+  const expected = true;
   actual.fork(
-    err => assert.equal(err.error, expected),
+    err => assert.equal(err.hasOwnProperty('error'), expected),
     () => assert.fail(`Element that did not exist returned a resolved future`)
   );
   assert.end();

@@ -1,5 +1,6 @@
 import test from 'tape';
-import * as saladbar from '../lib/bundle.esm';
+
+const saladbar = require('../lib/umd/saladbar-future.min');
 
 const isFunction = func => typeof func === 'function';
 
