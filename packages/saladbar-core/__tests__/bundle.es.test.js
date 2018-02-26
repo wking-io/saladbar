@@ -1,5 +1,5 @@
 import test from 'tape';
-import * as saladbar from '../lib/bundle.esm';
+import * as saladbar from '../lib/es';
 
 const isFunction = func => typeof func === 'function';
 
