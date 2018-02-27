@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 const fs = require('fs');
 const execSync = require('child_process').execSync;
 const prettyBytes = require('pretty-bytes');
@@ -23,14 +25,14 @@ exec('babel modules -d lib/es --ignore __tests__', {
 
 console.log('\nBuilding saladbar-future.js ...');
 
-exec('rollup -c -f umd -n saladbarFuture -o lib/umd/saladbar-future.js', {
+exec('rollup -c -f umd -n saladbar -o lib/umd/saladbar.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'development',
 });
 
 console.log('\nBuilding saladbar-future.min.js ...');
 
-exec('rollup -c -f umd -n saladbarFuture -o lib/umd/saladbar-future.min.js', {
+exec('rollup -c -f umd -n saladbar -o lib/umd/saladbar.min.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'production',
 });

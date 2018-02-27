@@ -1,10 +1,16 @@
 {
-  "name": "saladbar-future",
+  "name": "saladbar",
   "version": "0.1.2",
   "description": "Library of safe, composable dom functions.",
   "main": "lib/cjs/index.js",
-  "keywords": [],
   "module": "lib/es/index.js",
+  "keywords": [
+    "functional programming",
+    "IO",
+    "composable",
+    "functor",
+    "monad"
+  ],
   "repository": "https://github.com/wking-io/saladbar",
   "author": "Will King <contact@wking.io> (https://www.wking.io/)",
   "license": "Apache-2.0",
@@ -14,7 +20,8 @@
     "prepublishOnly": "node ./tools/build.js && yarn test:build",
     "clean": "git clean -fdX .",
     "lint": "eslint modules/**/*.js",
-    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
+    "format":
+      "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
     "test": "babel-tape-runner modules/__tests__/*.test.js | tap-spec",
     "test:build": "babel-tape-runner __tests__/*.test.js | tap-spec"
   },
