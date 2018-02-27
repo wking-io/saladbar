@@ -7665,7 +7665,7 @@ var index$24 = curry_1(toggleClass$2);
 var identity = function identity(a) {
   return a;
 }; // eslint-disable-line no-empty-function
-var globalFindParent = findParent$2();
+var globalFindParent = findParent$2(false);
 
 exports.addClass = index$8;
 exports.classList = index$9;

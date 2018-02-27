@@ -22,7 +22,7 @@ import setProp from './set-prop';
 import toggleClass from './toggle-class';
 
 const identity = a => a; // eslint-disable-line no-empty-function
-const globalFindParent = findParent();
+const globalFindParent = findParent(false);
 
 export {
   addClass,
