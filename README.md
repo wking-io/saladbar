@@ -1,19 +1,35 @@
 # saladbar 🥗
 
-Welcome to saladbar, a library of DOM functions built for composition that takes a functional approach to working with the DOM. Each function is curried by default and returns a [Future](https://github.com/fluture-js/Fluture).
+Welcome to saladbar, a library of DOM functions built for composition that takes a functional approach to working with the DOM.
 
-**Why the name saladbar?** Use this library to create your app by combining smaller functions to build up computations and consume it with a fork:
+**Why the name saladbar?** This library is used by combining smaller functions to build up chained DOM interactions and then consume it with a fork:
 
 ```js
-const changeTheme = color => compose(setData('theme', color), dom);
+// See point A below.
+const changeTheme = curry((color, dom) => compose(addClass(`theme--${color}`), setData('theme', color)(dom));
 
-// Now you can preload it with any dom element
-const changeThemeOne = changeTheme('.theme-wrapper');
-const changeThemeTwo = changeTheme('.theme-wrapper--two');
+// See point B below.
+const changeThemeMenuBlue = changeTheme('blue', '.menu');
 
-// Nothing above has been called yet. The DOM is not queried and no attributes have been changed...yet. Because all functions return Futures no computations are run until you fork them. This allows you to handle not only the success case, but the failures as well.
-changeThemeTwo.fork(console.error, console.log);
+// See point C below.
+changeThemeMenuBlue.fork(console.error, console.log);
 ```
+
+#### A: Combine individual building blocks for common use cases
+
+Let's pretend that you have a site where users can change the theme to a color they select. This function combines both the `addClass` and `setData` functions so that you now have one function that sets a class and a data attribute for any passed in DOM Element.
+
+You no longer have to define both of them separately on every DOM Element where you want this action to happen. You have one reusable function to pass around that take the dom element you want to change and the color you want to change it to.
+
+#### B: Load the composed function with arguments to reuse when you want
+
+Here we have now loaded our `changeTheme` function with a color and an element to make the changes to. However, none of the changes have happened at this point. That is because all functions in the library return a [Future](https://github.com/fluture-js/Fluture).
+
+#### C: Consume the built up transformation by forking it
+
+This is where it all happens. Up to this point we have just been building up transformations. The DOM has not been queried, there are no changes to DOM Elements. However, when we fork the built up function everything will be run.
+
+The method is called fork for a reason. With Futures we are now responsible and able to handle any errors that happen while trying to run our built up functions.
 
 If you are not familiar with some of the functional programming techniques seen above check out these awesome resources:
 
@@ -39,7 +55,7 @@ var { hasClass, dom } = require('saladbar');
 // Given this html
 // <div class="default test"></div>
 
-var hasClassTest = compose(hasClass('test'), dom);
+var hasClassTest = hasClass('test');
 
 hasClassTest('.default').fork(console.error, console.log);
 //> true
@@ -50,13 +66,12 @@ hasClassTest('.default').fork(console.error, console.log);
 The `package.json` sets a `module`-field for build-tools like [Rollup](https://rollupjs.org/guide/en) or [Webpack](https://webpack.js.org/).
 
 ```js
-import { compose } from 'ramda';
-import { dom, hasClass } from 'saladbar';
+import { hasClass } from 'saladbar';
 
 // Given this html
 // <div class="default test"></div>
 
-var hasClassTest = compose(hasClass('test'), dom);
+const hasClassTest = hasClass('test');
 
 hasClassTest('.default').fork(console.error, console.log);
 //> true
@@ -81,6 +96,15 @@ I wanted an easier way to write more functional, imperative code on the Front En
 If you wnat a deeper dive you can check out the blog post here:
 
 [**Why Saladbar?**](http://google.com)
+
+### Examples
+
+Play around with the API that solve the problems below.
+
+* [Accordion](https://codesandbox.io/s/lrzjlz8zqz)
+* [Open Menu]()
+* [Get form data]()
+* [Change style on scroll position]()
 
 ## Documentation
 
