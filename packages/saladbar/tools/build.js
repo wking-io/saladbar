@@ -37,6 +37,6 @@ exec('rollup -c -f umd -n saladbar -o lib/umd/saladbar.min.js', {
   NODE_ENV: 'production',
 });
 
-const size = gzipSize.sync(fs.readFileSync('lib/umd/saladbar-future.min.js'));
+const size = gzipSize.sync(fs.readFileSync('lib/umd/saladbar.min.js'));
 
 console.log('\ngzipped, the UMD build is %s', prettyBytes(size));

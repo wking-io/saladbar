@@ -22,7 +22,7 @@ import on from './on';
 import removeAttr from './remove-attr';
 import removeClass from './remove-class';
 import replaceClass from './replace-class';
-import runOnEvent from './runOnEvent';
+import forkOnEvent from './forkOnEvent';
 import serialize from './serialize';
 import setAttr from './set-attr';
 import setData from './set-data';
@@ -39,6 +39,7 @@ export {
   dom,
   domAll,
   globalFindParent as findParent,
+  forkOnEvent,
   getAttr,
   getClass,
   getClasses,
@@ -59,7 +60,6 @@ export {
   removeAttr,
   removeClass,
   replaceClass,
-  runOnEvent,
   serialize,
   setAttr,
   setData,
