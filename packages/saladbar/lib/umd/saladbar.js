@@ -6851,7 +6851,7 @@ var _getStyle = function _getStyle(prop, dom) {
   return window.getComputedStyles(dom, null)[prop] || null;
 };
 
-curry_1(_getStyle);
+var getStyle = curry_1(_getStyle);
 
 // _hasAttr :: String -> DOM Element -> Bool
 
@@ -6889,7 +6889,7 @@ var _hasStyle = function _hasStyle(prop, dom) {
   return window.getComputedStyle(dom, null).hasOwnProperty(prop);
 };
 
-curry_1(_hasStyle);
+var hasStyle = curry_1(_hasStyle);
 
 // _isAttr :: String -> String -> DOM Element -> Bool
 
@@ -6897,7 +6897,7 @@ var _isAttr = function _isAttr(attr, val, dom) {
   return dom.hasAttribute(attr) ? dom.getAttribute(attr) === val : null;
 };
 
-curry_1(_isAttr);
+var isAttr = curry_1(_isAttr);
 
 // _isData :: String -> String -> DOM Element -> Bool
 
@@ -6905,7 +6905,7 @@ var _isData = function _isData(prop, val, dom) {
   return dom.dataset.hasOwnProperty(prop) ? dom.dataset[prop] === val : null;
 };
 
-curry_1(_isData);
+var isData = curry_1(_isData);
 
 // _isProp :: String -> String -> DOM Element -> Bool
 
@@ -6913,7 +6913,7 @@ var _isProp = function _isProp(prop, val, dom) {
   return dom[prop] ? dom[prop] === val : null;
 };
 
-curry_1(_isProp);
+var isProp = curry_1(_isProp);
 
 // _isStyle :: String -> String -> DOM Element -> Bool
 
@@ -6922,7 +6922,16 @@ var _isStyle = function _isStyle(prop, val, dom) {
   return domStyles.hasOwnProperty(prop) ? domStyles[prop] === val : null;
 };
 
-curry_1(_isStyle);
+var isStyle = curry_1(_isStyle);
+
+// _on :: String -> (a -> b) -> DOM Element -> DOM Element
+
+var _on = function _on(event, handler, dom) {
+  dom.addEventListener(event, handler, dom);
+  return dom;
+};
+
+var on = curry_1(_on);
 
 // _removeAttr :: String -> DOM Element -> DOM Element
 
@@ -6943,7 +6952,7 @@ var _replaceClass = function _replaceClass(ocn, ncn, dom) {
   return dom;
 };
 
-curry_1(_replaceClass);
+var replaceClass = curry_1(_replaceClass);
 
 var isFormNode = function isFormNode(el) {
   return el && el.nodeType === 1 && el.nodeName === 'FORM';
@@ -7098,7 +7107,7 @@ var _setStyle = function _setStyle(prop, val, dom) {
   return dom;
 };
 
-curry_1(_setStyle);
+var setStyle = curry_1(_setStyle);
 
 // toggleClass :: String -> DOM Element -> DOM Element
 var toggleClass = classList('toggle');
@@ -7360,7 +7369,7 @@ var addClass$1 = function addClass(cn, dom) {
   return branch$1(_addClass$2(cn))(dom);
 };
 
-var index$8 = curry_1(addClass$1);
+var index = curry_1(addClass$1);
 
 // _classList :: String -> String -> DOM Element -> Future Error DOM Element
 var _classList$1 = function _classList(method, cn, dom) {
@@ -7374,7 +7383,7 @@ var classList$1 = function classList(method, classname, dom) {
   return branch$1(_classList$2(method, classname))(dom);
 };
 
-var index$9 = curry_1(classList$1);
+var index$1 = curry_1(classList$1);
 
 // domAll :: String -> DOM Element -> Future Error [DOM Element]
 var _domAll$1 = function _domAll$$1(cs) {
@@ -7414,12 +7423,6 @@ var findParent$1 = function findParent(global, pred, dom) {
 
 var findParent$2 = curry_1(findParent$1);
 
-var fork = function fork(rej, res, future) {
-  return future.fork(rej, res);
-};
-
-var index$10 = curry_1(fork);
-
 // _getAttr :: String -> DOM Element -> Future Error String
 var _getAttr$1 = function _getAttr(attr, dom) {
   var result = getAttr(attr, dom);
@@ -7436,7 +7439,7 @@ var getAttr$1 = function getAttr(attr, dom) {
   return branch$1(_getAttr$2(attr))(dom);
 };
 
-var index$11 = curry_1(getAttr$1);
+var index$2 = curry_1(getAttr$1);
 
 // _getClass :: Int -> DOM Element -> Future Error String
 var _getClass$1 = function _getClass(idx, dom) {
@@ -7454,7 +7457,7 @@ var getClass$1 = function getClass(idx, dom) {
   return branch$1(_getClass$2(idx))(dom);
 };
 
-var index$12 = curry_1(getClass$1);
+var index$3 = curry_1(getClass$1);
 
 // _getClasses :: DOM Element -> Future Error String
 var _getClasses$1 = function _getClasses$$1(dom) {
@@ -7486,7 +7489,7 @@ var getData$1 = function getData(prop, dom) {
   return branch$1(_getData$2(prop))(dom);
 };
 
-var index$13 = curry_1(getData$1);
+var index$4 = curry_1(getData$1);
 
 // _getProp :: String -> DOM Element -> Future Error String
 var _getProp$1 = function _getProp(prop, dom) {
@@ -7504,7 +7507,25 @@ var getProp$1 = function getProp(prop, dom) {
   return branch$1(_getProp$2(prop))(dom);
 };
 
-var index$14 = curry_1(getProp$1);
+var index$5 = curry_1(getProp$1);
+
+// _getStyle :: String -> DOM Element -> Future Error String
+var _getStyle$1 = function _getStyle(prop, dom) {
+  var result = getStyle(prop, dom);
+
+  return result ? fluture_2(result) : fluture_3({
+    error: 'No style property was found with the following name: ' + prop
+  });
+};
+
+var _getStyle$2 = curry_1(_getStyle$1);
+
+// getStyle :: String -> DOM Element -> Future Error String
+var getStyle$1 = function getStyle(prop, dom) {
+  return branch$1(_getStyle$2(prop))(dom);
+};
+
+var index$6 = curry_1(getStyle$1);
 
 // _hasAttr :: String -> DOM Element -> Future Error Bool
 var _hasAttr$1 = function _hasAttr(attr, dom) {
@@ -7518,7 +7539,7 @@ var hasAttr$1 = function hasAttr(attr, dom) {
   return branch$1(_hasAttr$2(attr))(dom);
 };
 
-var index$15 = curry_1(hasAttr$1);
+var index$7 = curry_1(hasAttr$1);
 
 // _hasClass :: String -> DOM Element -> Future Error DOM Element
 var _hasClass$1 = function _hasClass(cn, dom) {
@@ -7532,7 +7553,7 @@ var hasClass$1 = function hasClass(cn, dom) {
   return branch$1(_hasClass$2(cn))(dom);
 };
 
-var index$16 = curry_1(hasClass$1);
+var index$8 = curry_1(hasClass$1);
 
 // _hasData :: String -> DOM Element -> Future Error Bool
 var _hasData = function _hasData(prop, dom) {
@@ -7546,7 +7567,7 @@ var hasData$2 = function hasData(prop, dom) {
   return branch$1(_hasData$1(prop))(dom);
 };
 
-var index$17 = curry_1(hasData$2);
+var index$9 = curry_1(hasData$2);
 
 // _hasProp :: String -> DOM Element -> Future Error Bool
 var _hasProp = function _hasProp(prop, dom) {
@@ -7560,7 +7581,107 @@ var hasProp$2 = function hasProp(prop, dom) {
   return branch$1(_hasProp$1(prop))(dom);
 };
 
-var index$18 = curry_1(hasProp$2);
+var index$10 = curry_1(hasProp$2);
+
+// _hasStyle :: String -> DOM Element -> Future Error Bool
+var _hasStyle$1 = function _hasStyle(prop, dom) {
+  return fluture_2(hasStyle(prop, dom));
+};
+
+var _hasProp$2 = curry_1(_hasStyle$1);
+
+// hasStyle :: String -> DOM Element -> Future Error Bool
+var hasStyle$1 = function hasStyle(prop, dom) {
+  return branch$1(_hasProp$2(prop))(dom);
+};
+
+var index$11 = curry_1(hasStyle$1);
+
+// _isAttr :: String -> String -> DOM Element -> Future Error Bool
+var _isAttr$1 = function _isAttr(attr, val, dom) {
+  var result = isAttr(attr, val, dom);
+
+  return result !== null ? fluture_2(result) : fluture_3({
+    error: 'There is not an attribute with the following name on this element: ' + attr
+  });
+};
+
+var _isAttr$2 = curry_1(_isAttr$1);
+
+// isAttr :: String -> String -> DOM Element -> Future Error Bool
+var isAttr$1 = function isAttr(attr, val, dom) {
+  return branch$1(_isAttr$2(attr, val))(dom);
+};
+
+var index$12 = curry_1(isAttr$1);
+
+// _isData :: String -> String -> DOM Element -> Future Error Bool
+var _isData$1 = function _isData(prop, val, dom) {
+  var result = isData(prop, val, dom);
+
+  return result !== null ? fluture_2(result) : fluture_3({
+    error: 'There is not a data-attribute with the following name on this element: ' + prop
+  });
+};
+
+var _isData$2 = curry_1(_isData$1);
+
+// isData :: String -> String -> DOM Element -> Future Error Bool
+var isData$1 = function isData(prop, val, dom) {
+  return branch$1(_isData$2(prop, val))(dom);
+};
+
+var index$13 = curry_1(isData$1);
+
+// _isProp :: String -> String -> DOM Element -> Future Error Bool
+var _isProp$1 = function _isProp(prop, val, dom) {
+  var result = isProp(prop, val, dom);
+
+  return result !== null ? fluture_2(result) : fluture_3({
+    error: 'There is not a property with the following name on this element: ' + prop
+  });
+};
+
+var _isProp$2 = curry_1(_isProp$1);
+
+// isProp :: String -> String -> DOM Element -> Future Error Bool
+var isProp$1 = function isProp(prop, val, dom) {
+  return branch$1(_isProp$2(prop, val))(dom);
+};
+
+var index$14 = curry_1(isProp$1);
+
+// _isStyle :: String -> String -> DOM Element -> Future Error Bool
+var _isStyle$1 = function _isStyle(prop, val, dom) {
+  var result = isStyle(prop, val, dom);
+
+  return result !== null ? fluture_2(result) : fluture_3({
+    error: 'There is not a style property with the following name on this element: ' + prop
+  });
+};
+
+var _isStyle$2 = curry_1(_isStyle$1);
+
+// isStyle :: String -> String -> DOM Element -> Future Error Bool
+var isStyle$1 = function isStyle(prop, val, dom) {
+  return branch$1(_isStyle$2(prop, val))(dom);
+};
+
+var index$15 = curry_1(isStyle$1);
+
+// _on :: String -> Future Error a -> DOM Element -> Future Error DOM Element
+var _on$1 = function _on(event, handler, dom) {
+  return fluture_2(on(event, handler, dom));
+};
+
+var _on$2 = curry_1(_on$1);
+
+// _replaceClass :: String -> Future Error a -> DOM Element -> Future Error DOM Element
+var _removeClass$1 = function _removeClass(event, handler, dom) {
+  return branch$1(_on$2(event, handler))(dom);
+};
+
+var index$16 = curry_1(_removeClass$1);
 
 // _removeAttr :: String -> DOM Element -> Future Error DOM Element
 var _removeAttr$1 = function _removeAttr(attr, dom) {
@@ -7574,21 +7695,48 @@ var removeAttr$1 = function removeAttr(attr, dom) {
   return branch$1(_removeAttr$2(attr))(dom);
 };
 
-var index$19 = curry_1(removeAttr$1);
+var index$17 = curry_1(removeAttr$1);
 
 // _removeClass :: String -> String -> DOM Element -> Future Error DOM Element
-var _removeClass$1 = function _removeClass$$1(cn, dom) {
+var _removeClass$2 = function _removeClass$$1(cn, dom) {
   return fluture_2(_removeClass(cn, dom));
 };
 
-var _removeClass$2 = curry_1(_removeClass$1);
+var _removeClass$3 = curry_1(_removeClass$2);
 
 // removeClass :: String -> String -> DOM Element -> Future Error DOM Element
 var removeClass$1 = function removeClass(cn, dom) {
-  return branch$1(_removeClass$2(cn))(dom);
+  return branch$1(_removeClass$3(cn))(dom);
 };
 
-var index$20 = curry_1(removeClass$1);
+var index$18 = curry_1(removeClass$1);
+
+// _replaceClass :: String -> String -> DOM Element -> Future Error DOM Element
+var _removeClass$4 = function _removeClass$$1(ocn, ncn, dom) {
+  return fluture_2(replaceClass(ocn, ncn, dom));
+};
+
+var _replaceClass$1 = curry_1(_removeClass$4);
+
+// _replaceClass :: String -> String -> DOM Element -> Future Error DOM Element
+var _removeClass$5 = function _removeClass(ocn, ncn, dom) {
+  return branch$1(_replaceClass$1(ocn, ncn))(dom);
+};
+
+var index$19 = curry_1(_removeClass$5);
+
+var fork = function fork(rej, res, future) {
+  return future.fork(rej, res);
+};
+
+var fork$1 = curry_1(fork);
+
+// runOnEvent :: (Error -> c) -> (a -> b) -> (Event -> Future Error a) -> (Event -> Cancel)
+var runOnEvent = function runOnEvent(rej, res, fn) {
+  return compose_1(fork$1(rej, res), fn);
+};
+
+var index$20 = curry_1(runOnEvent);
 
 // _serialize :: Form Element -> Future e {Input Name: Input Value}
 var _serialize$1 = function _serialize$$1(form) {
@@ -7648,6 +7796,20 @@ var setProp$1 = function setProp(prop, val, dom) {
 
 var index$23 = curry_1(setProp$1);
 
+// _setStyle :: String -> String -> DOM Element -> Future Error DOM Element
+var _setStyle$1 = function _setStyle(prop, val, dom) {
+  return fluture_2(setStyle(prop, val, dom));
+};
+
+var _setStyle$2 = curry_1(_setStyle$1);
+
+// setStyle :: String -> String -> DOM Element -> Future Error DOM Element
+var setStyle$1 = function setStyle(prop, val, dom) {
+  return branch$1(_setStyle$2(prop, val))(dom);
+};
+
+var index$24 = curry_1(setStyle$1);
+
 // _toggleClass :: String -> DOM Element -> Future Error DOM Element
 var _toggleClass = function _toggleClass(cn, dom) {
   return fluture_2(toggleClass(cn, dom));
@@ -7660,36 +7822,45 @@ var toggleClass$2 = function toggleClass(cn, dom) {
   return branch$1(_toggleClass$1(cn))(dom);
 };
 
-var index$24 = curry_1(toggleClass$2);
+var index$25 = curry_1(toggleClass$2);
 
 var identity = function identity(a) {
   return a;
 }; // eslint-disable-line no-empty-function
 var globalFindParent = findParent$2(false);
 
-exports.addClass = index$8;
-exports.classList = index$9;
+exports.addClass = index;
+exports.classList = index$1;
 exports.dom = _dom$1;
 exports.domAll = _domAll$1;
 exports.findParent = globalFindParent;
-exports.fork = index$10;
-exports.getAttr = index$11;
-exports.getClass = index$12;
+exports.getAttr = index$2;
+exports.getClass = index$3;
 exports.getClasses = getClasses$1;
-exports.getData = index$13;
-exports.getProp = index$14;
-exports.hasAttr = index$15;
-exports.hasClass = index$16;
-exports.hasData = index$17;
-exports.hasProp = index$18;
+exports.getData = index$4;
+exports.getProp = index$5;
+exports.getStyle = index$6;
+exports.hasAttr = index$7;
+exports.hasClass = index$8;
+exports.hasData = index$9;
+exports.hasProp = index$10;
+exports.hasStyle = index$11;
+exports.isAttr = index$12;
+exports.isData = index$13;
+exports.isProp = index$14;
+exports.isStyle = index$15;
 exports.identity = identity;
-exports.removeAttr = index$19;
-exports.removeClass = index$20;
+exports.on = index$16;
+exports.removeAttr = index$17;
+exports.removeClass = index$18;
+exports.replaceClass = index$19;
+exports.runOnEvent = index$20;
 exports.serialize = serialize$1;
 exports.setAttr = index$21;
 exports.setData = index$22;
 exports.setProp = index$23;
-exports.toggleClass = index$24;
+exports.setStyle = index$24;
+exports.toggleClass = index$25;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -23,14 +23,14 @@ exec('babel modules -d lib/es --ignore __tests__', {
   BABEL_ENV: 'es',
 });
 
-console.log('\nBuilding saladbar-future.js ...');
+console.log('\nBuilding saladbar.js ...');
 
 exec('rollup -c -f umd -n saladbar -o lib/umd/saladbar.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'development',
 });
 
-console.log('\nBuilding saladbar-future.min.js ...');
+console.log('\nBuilding saladbar.min.js ...');
 
 exec('rollup -c -f umd -n saladbar -o lib/umd/saladbar.min.js', {
   BABEL_ENV: 'umd',

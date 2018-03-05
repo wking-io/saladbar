@@ -3,7 +3,6 @@ import classList from './class-list';
 import dom from './dom';
 import domAll from './dom-all';
 import findParent from './find-parent';
-import fork from './fork';
 import getAttr from './get-attr';
 import getClass from './get-class';
 import getClasses from './get-classes';
@@ -19,9 +18,11 @@ import isAttr from './is-attr';
 import isData from './is-data';
 import isProp from './is-prop';
 import isStyle from './is-style';
+import on from './on';
 import removeAttr from './remove-attr';
 import removeClass from './remove-class';
 import replaceClass from './replace-class';
+import runOnEvent from './runOnEvent';
 import serialize from './serialize';
 import setAttr from './set-attr';
 import setData from './set-data';
@@ -38,7 +39,6 @@ export {
   dom,
   domAll,
   globalFindParent as findParent,
-  fork,
   getAttr,
   getClass,
   getClasses,
@@ -55,9 +55,11 @@ export {
   isProp,
   isStyle,
   identity,
+  on,
   removeAttr,
   removeClass,
   replaceClass,
+  runOnEvent,
   serialize,
   setAttr,
   setData,
