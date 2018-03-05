@@ -477,6 +477,15 @@ var _isStyle = function _isStyle(prop, val, dom) {
 
 var index$14 = curry_1(_isStyle);
 
+// _on :: String -> (a -> b) -> DOM Element -> DOM Element
+
+var _on = function _on(event, handler, dom) {
+  dom.addEventListener(event, handler, dom);
+  return dom;
+};
+
+var index$15 = curry_1(_on);
+
 // _removeAttr :: String -> DOM Element -> DOM Element
 
 var _removeAttr = function _removeAttr(attr, dom) {
@@ -484,7 +493,7 @@ var _removeAttr = function _removeAttr(attr, dom) {
   return dom;
 };
 
-var index$15 = curry_1(_removeAttr);
+var index$16 = curry_1(_removeAttr);
 
 // _removeClass :: String | [String] -> DOM Element -> DOM Element
 var _removeClass = classList('remove');
@@ -496,7 +505,7 @@ var _replaceClass = function _replaceClass(ocn, ncn, dom) {
   return dom;
 };
 
-var index$16 = curry_1(_replaceClass);
+var index$17 = curry_1(_replaceClass);
 
 var isFormNode = function isFormNode(el) {
   return el && el.nodeType === 1 && el.nodeName === 'FORM';
@@ -564,7 +573,7 @@ var _setAttr = function _setAttr(attr, val, dom) {
   return dom;
 };
 
-var index$17 = curry_1(_setAttr);
+var index$18 = curry_1(_setAttr);
 
 // This regex checks the string passed in has the following qualities:
 // 1. Has no spaces.
@@ -589,7 +598,7 @@ var _setData = function _setData(prop, val, dom) {
   return null;
 };
 
-var index$18 = curry_1(_setData);
+var index$19 = curry_1(_setData);
 
 // _setProp :: String -> String -> DOM Element -> DOM Element
 
@@ -598,7 +607,7 @@ var _setProp = function _setProp(attr, val, dom) {
   return dom;
 };
 
-var index$19 = curry_1(_setProp);
+var index$20 = curry_1(_setProp);
 
 // _setStyle :: String -> String -> DOM Element -> DOM Element
 
@@ -607,7 +616,7 @@ var _setStyle = function _setStyle(prop, val, dom) {
   return dom;
 };
 
-var index$20 = curry_1(_setStyle);
+var index$21 = curry_1(_setStyle);
 
 // toggleClass :: String -> DOM Element -> DOM Element
 var toggleClass = classList('toggle');
@@ -632,14 +641,15 @@ exports.isAttr = index$11;
 exports.isData = index$12;
 exports.isProp = index$13;
 exports.isStyle = index$14;
-exports.removeAttr = index$15;
+exports.on = index$15;
+exports.removeAttr = index$16;
 exports.removeClass = _removeClass;
-exports.replaceClass = index$16;
+exports.replaceClass = index$17;
 exports.serialize = _serialize;
-exports.setAttr = index$17;
-exports.setData = index$18;
-exports.setProp = index$19;
-exports.setStyle = index$20;
+exports.setAttr = index$18;
+exports.setData = index$19;
+exports.setProp = index$20;
+exports.setStyle = index$21;
 exports.toggleClass = toggleClass;
 
 Object.defineProperty(exports, '__esModule', { value: true });

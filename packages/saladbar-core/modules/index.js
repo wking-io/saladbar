@@ -18,6 +18,7 @@ import isAttr from './is-attr';
 import isData from './is-data';
 import isProp from './is-prop';
 import isStyle from './is-style';
+import on from './on';
 import removeAttr from './remove-attr';
 import removeClass from './remove-class';
 import replaceClass from './replace-class';
@@ -49,6 +50,7 @@ export {
   isData,
   isProp,
   isStyle,
+  on,
   removeAttr,
   removeClass,
   replaceClass,
