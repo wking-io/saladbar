@@ -1,11 +1,11 @@
 import { of, reject } from 'fluture';
 import test from 'tape';
-import runOnEvent from '../runOnEvent';
+import forkOnEvent from '../forkOnEvent';
 
-test('runOnEvent handles successful Future by auto forking it on an action.', assert => {
+test('forkOnEvent handles successful Future by auto forking it on an action.', assert => {
   const testFuture = () => of(2);
   const expected = 2;
-  const result = runOnEvent(
+  const result = forkOnEvent(
     assert.fail,
     actual => assert.equal(actual, expected),
     testFuture
@@ -14,10 +14,10 @@ test('runOnEvent handles successful Future by auto forking it on an action.', as
   assert.end();
 });
 
-test('runOnEvent handles failed Future by auto forking it on an action.', assert => {
+test('forkOnEvent handles failed Future by auto forking it on an action.', assert => {
   const testFuture = () => reject(2);
   const expected = 2;
-  const result = runOnEvent(
+  const result = forkOnEvent(
     actual => assert.equal(actual, expected),
     val =>
       assert.fail(

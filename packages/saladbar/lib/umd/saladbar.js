@@ -7115,12 +7115,27 @@ var toggleClass = classList('toggle');
 // _dom :: String -> DOM Element -> Future Error DOM Element
 var _dom$1 = function _dom$$1(cs) {
   var root = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  return fluture_4(function (rej, res) {
-    var elm = _dom(cs, root);
-    return elm ? res(elm) : rej({
-      error: 'An element with the following selector was not found: ' + cs
+
+  var getDom = function getDom(parent) {
+    return fluture_4(function (rej, res) {
+      var elm = _dom(cs, parent);
+      return elm ? res(elm) : rej({
+        error: 'An element with the following selector was not found: ' + cs
+      });
     });
-  });
+  };
+
+  var withFuture = function withFuture(parent) {
+    return parent.chain(function (el) {
+      return getDom(el);
+    }).mapRej(function () {
+      return {
+        error: 'An element with the following selector was not found: ' + cs
+      };
+    });
+  };
+
+  return fluture_1(root) ? withFuture(root) : getDom(root);
 };
 
 var guaranteeFuture = function guaranteeFuture(el) {
@@ -7385,15 +7400,30 @@ var classList$1 = function classList(method, classname, dom) {
 
 var index$1 = curry_1(classList$1);
 
-// domAll :: String -> DOM Element -> Future Error [DOM Element]
+// _domAll :: String -> DOM Element -> Future Error [DOM Element]
 var _domAll$1 = function _domAll$$1(cs) {
   var root = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  return fluture_4(function (rej, res) {
-    var elms = _domAll(cs, root);
-    return elms ? res(elms) : rej({
-      error: 'An element with the following selector was not found: ' + cs
+
+  var getDomAll = function getDomAll(parent) {
+    return fluture_4(function (rej, res) {
+      var elms = _domAll(cs, parent);
+      return elms ? res(elms) : rej({
+        error: 'An element with the following selector was not found: ' + cs
+      });
     });
-  });
+  };
+
+  var withFuture = function withFuture(parent) {
+    return parent.chain(function (el) {
+      return getDomAll(el);
+    }).mapRej(function () {
+      return {
+        error: 'An element with the following selector was not found: ' + cs
+      };
+    });
+  };
+
+  return fluture_1(root) ? withFuture(root) : getDomAll(root);
 };
 
 // futureFindParent :: DOM -> Future Error Bool -> DOM Element -> Future Error DOM Element
