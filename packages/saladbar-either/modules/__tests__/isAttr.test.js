@@ -1,0 +1,88 @@
+import Result from 'folktale/result';
+import test from 'tape';
+import createElement from '../utils/create/createElement';
+import isAttr from '../is-attr';
+
+test('isAttr returns true when property exists and the value matches on an element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
+  const result = isAttr('aria-expanded', 'false', testEl);
+  const expected = true;
+  result
+    .mapError(err => assert.fail(err))
+    .map(actual => assert.equal(actual, expected));
+  assert.end();
+});
+
+test('isAttr returns true when property exists and the value matches on a future element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = Result.of(document.querySelector('.default'));
+  const result = isAttr('aria-expanded', 'false', testEl);
+  const expected = true;
+  result
+    .mapError(err => assert.fail(err))
+    .map(actual => assert.equal(actual, expected));
+  assert.end();
+});
+
+test('isAttr returns false when property exists but the value does not match on an element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
+  const result = isAttr('aria-expanded', 'true', testEl);
+  const expected = false;
+  result
+    .mapError(err => assert.fail(err))
+    .map(actual => assert.equal(actual, expected));
+  assert.end();
+});
+
+test('isAttr returns false when property exists but the value does not match on a future element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = Result.of(document.querySelector('.default'));
+  const result = isAttr('aria-expanded', 'true', testEl);
+  const expected = false;
+  result
+    .mapError(err => assert.fail(err))
+    .map(actual => assert.equal(actual, expected));
+  assert.end();
+});
+
+test('isAttr returns error when property does not exist on an element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
+  const result = isAttr('not-real', 'test', testEl);
+  const expected = true;
+  result
+    .mapError(actual => assert.equal(actual.hasOwnProperty('error'), expected))
+    .map(err => assert.fail(err));
+  assert.end();
+});
+
+test('isAttr returns error when property does not exist on a future element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = Result.of(document.querySelector('.default'));
+  const result = isAttr('not-real', 'test', testEl);
+  const expected = true;
+  result
+    .mapError(actual => assert.equal(actual.hasOwnProperty('error'), expected))
+    .map(err => assert.fail(err));
+  assert.end();
+});

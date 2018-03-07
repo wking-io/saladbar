@@ -1,6 +1,6 @@
 {
   "name": "saladbar-core",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Core helper functions for building composable dom functions.",
   "main": "lib/cjs/index.js",
   "keywords": [
@@ -30,7 +30,11 @@
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.1",
+    "babel-plugin-external-helpers": "6.22.0",
+    "babel-plugin-transform-imports": "1.5.0",
+    "babel-preset-env": "1.6.1",
     "babel-tape-runner": "2.0.1",
+    "eslint": "4.18.2",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.8.0",
     "gzip-size": "4.1.0",
