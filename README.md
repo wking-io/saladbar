@@ -101,10 +101,10 @@ If you wnat a deeper dive you can check out the blog post here:
 
 Play around with the API that solve the problems below.
 
-* [Accordion](https://codesandbox.io/s/lrzjlz8zqz)
-* [Open Menu]()
-* [Get form data]()
-* [Change style on scroll position]()
+* [Accordion](https://codesandbox.io/s/ykrm04qzkz)
+* [Open Menu](https://codesandbox.io/s/n30j1m1wkj)
+* [Get form data](https://codesandbox.io/s/n30j1m1wkj)
+* [Change style on scroll position](https://codesandbox.io/s/0yy9j3n8wl)
 
 ## Documentation
 

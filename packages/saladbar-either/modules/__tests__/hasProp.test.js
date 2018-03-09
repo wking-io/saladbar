@@ -1,4 +1,4 @@
-import Result from 'folktale/result';
+import Either from 'data.either';
 import test from 'tape';
 import createElement from '../utils/create/createElement';
 import hasProp from '../has-prop';
@@ -32,7 +32,7 @@ test('hasProp returns true when class exists on a future element', assert => {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const testEl = Result.of(document.querySelector('.default'));
+  const testEl = Either.of(document.querySelector('.default'));
   const result = hasProp('classList', testEl);
   const expected = true;
   result.map(bool => assert.equal(bool, expected));
@@ -44,7 +44,7 @@ test('hasProp returns false when class does not exists on a future element', ass
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const testEl = Result.of(document.querySelector('.default'));
+  const testEl = Either.of(document.querySelector('.default'));
   const result = hasProp('not-real', testEl);
   const expected = false;
   result.map(bool => assert.equal(bool, expected));

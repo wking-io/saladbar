@@ -7,6 +7,7 @@ import getAttr from './get-attr';
 import getClass from './get-class';
 import getClasses from './get-classes';
 import getData from './get-data';
+import getPosition from './get-position';
 import getProp from './get-prop';
 import getStyle from './get-style';
 import hasAttr from './has-attr';
@@ -39,6 +40,7 @@ export {
   getClass,
   getClasses,
   getData,
+  getPosition,
   getProp,
   getStyle,
   hasAttr,

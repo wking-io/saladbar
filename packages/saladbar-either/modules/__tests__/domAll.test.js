@@ -1,5 +1,5 @@
 import test from 'tape';
-import Result from 'folktale/result';
+import Either from 'data.either';
 import createElement from '../utils/create/createElement';
 import domAll from '../dom-all';
 import isArray from '../utils/is-array';
@@ -10,7 +10,7 @@ test('domAll returns a future that resolves to an element when element exists.',
   const root = document.querySelector('.wrapper');
   const actual = domAll('.default', root);
   const expected = true;
-  actual.mapError(err => assert.fail(err)).map(els => {
+  actual.leftMap(err => assert.fail(err)).map(els => {
     assert.equal(isArray(els), expected);
     els.forEach(el => assert.equal(isElmNode(el), expected));
   });
@@ -23,7 +23,7 @@ test('domAll returns a future that resolves to an error when element does not ex
   const actual = domAll('.not-real', root);
   const expected = true;
   actual
-    .mapError(err => assert.equal(err.hasOwnProperty('error'), expected))
+    .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
     .map(() =>
       assert.fail(`Elements that did not exist returned a resolved future`)
     );
@@ -32,10 +32,10 @@ test('domAll returns a future that resolves to an error when element does not ex
 
 test('domAll returns a future that resolves to an element when element exists and root Future.', assert => {
   const document = createElement(3, { classes: 'default' });
-  const root = Result.of(document.querySelector('.wrapper'));
+  const root = Either.of(document.querySelector('.wrapper'));
   const actual = domAll('.default', root);
   const expected = true;
-  actual.mapError(err => assert.fail(err)).map(els => {
+  actual.leftMap(err => assert.fail(err)).map(els => {
     assert.equal(isArray(els), expected);
     els.forEach(el => assert.equal(isElmNode(el), expected));
   });
@@ -44,11 +44,11 @@ test('domAll returns a future that resolves to an element when element exists an
 
 test('domAll returns a future that resolves to an error when element does not exist and root Future.', assert => {
   const document = createElement(3, { classes: 'default' });
-  const root = Result.of(document.querySelector('.wrapper'));
+  const root = Either.of(document.querySelector('.wrapper'));
   const actual = domAll('.not-real', root);
   const expected = true;
   actual
-    .mapError(err => assert.equal(err.hasOwnProperty('error'), expected))
+    .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
     .map(() =>
       assert.fail(`Elements that did not exist returned a resolved future`)
     );

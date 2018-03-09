@@ -1,4 +1,4 @@
-import Result from 'folktale/result';
+import Either from 'data.either';
 import test from 'tape';
 import createElement from '../utils/create/createElement';
 import getClasses from '../get-classes';
@@ -9,7 +9,7 @@ test('getClasses returns object of classes with all classes that exist on elemen
   const result = getClasses(testEl);
   const expected = 2;
   result
-    .mapError(() => assert.fail())
+    .leftMap(() => assert.fail())
     .map(actual => assert.equal(actual.length, expected));
   assert.end();
 });
@@ -20,7 +20,7 @@ test('getClasses returns error if no classes found on element', assert => {
   const result = getClasses(testEl);
   const expected = true;
   result
-    .mapError(err => assert.equal(err.hasOwnProperty('error'), expected))
+    .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
     .map(() =>
       assert.fail('getClasses did not return errror when there are no classes.')
     );
@@ -29,22 +29,22 @@ test('getClasses returns error if no classes found on element', assert => {
 
 test('getClasses returns object of classes with all classes that exist on a future element', assert => {
   const document = createElement(1, { classes: 'default also-this' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const result = getClasses(futureEl);
   const expected = 2;
   result
-    .mapError(() => assert.fail())
+    .leftMap(() => assert.fail())
     .map(actual => assert.equal(actual.length, expected));
   assert.end();
 });
 
 test('getClasses returns error no classes found on a future element', assert => {
   const document = createElement(1, { classes: '', id: 'default' });
-  const futureEl = Result.of(document.querySelector('#default'));
+  const futureEl = Either.of(document.querySelector('#default'));
   const result = getClasses(futureEl);
   const expected = true;
   result
-    .mapError(err => assert.equal(err.hasOwnProperty('error'), expected))
+    .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
     .map(() =>
       assert.fail('getClasses did not return errror when there are no classes.')
     );

@@ -1,11 +1,11 @@
 import { curry } from 'ramda';
-import Result from 'folktale/result';
+import Either from 'data.either';
 import { removeAttr } from 'saladbar-core';
 
 // _removeAttr :: String -> DOM Element -> Future Error DOM Element
 const _removeAttr = (attr, dom) =>
-  Result.fromNullable(removeAttr(attr, dom), {
+  Either.fromNullable(removeAttr(attr, dom)).leftMap(() => ({
     error: 'Error running removeAttr function.',
-  });
+  }));
 
 export default curry(_removeAttr);

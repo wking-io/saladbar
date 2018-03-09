@@ -1,4 +1,4 @@
-import Result from 'folktale/result';
+import Either from 'data.either';
 import test from 'tape';
 import createElement from '../utils/create/createElement';
 import hasData from '../has-data';
@@ -32,7 +32,7 @@ test('hasData returns true when data attribute exists on a future element', asse
     attrs: ['data-test="true"'],
     classes: 'default',
   });
-  const testEl = Result.of(document.querySelector('.default'));
+  const testEl = Either.of(document.querySelector('.default'));
   const result = hasData('test', testEl);
   const expected = true;
   result.map(bool => assert.equal(bool, expected));
@@ -44,7 +44,7 @@ test('hasData returns false when data attribute does not exists on a future elem
     attrs: ['data-test="true"'],
     classes: 'default',
   });
-  const testEl = Result.of(document.querySelector('.default'));
+  const testEl = Either.of(document.querySelector('.default'));
   const result = hasData('not-real', testEl);
   const expected = false;
   result.map(bool => assert.equal(bool, expected));

@@ -390,13 +390,27 @@ var _getData = function _getData(prop, dom) {
 
 var index$3 = curry_1(_getData);
 
+// _getData :: String -> DOM Element -> String | Null
+
+var _getPosition = function _getPosition(dom) {
+  var _dom$getBoundingClien = dom.getBoundingClientRect(),
+      top = _dom$getBoundingClien.top,
+      right = _dom$getBoundingClien.right,
+      bottom = _dom$getBoundingClien.bottom,
+      left = _dom$getBoundingClien.left;
+
+  return top && right && bottom && left ? { top: top, right: right, bottom: bottom, left: left } : null;
+};
+
+var index$4 = curry_1(_getPosition);
+
 // _getProp :: String -> DOM Element -> String | Null
 
 var _getProp = function _getProp(prop, dom) {
   return dom[prop] || null;
 };
 
-var index$4 = curry_1(_getProp);
+var index$5 = curry_1(_getProp);
 
 // _getStyle :: String -> DOM Element -> String
 
@@ -404,7 +418,7 @@ var _getStyle = function _getStyle(prop, dom) {
   return window.getComputedStyles(dom, null)[prop] || null;
 };
 
-var index$5 = curry_1(_getStyle);
+var index$6 = curry_1(_getStyle);
 
 // _hasAttr :: String -> DOM Element -> Bool
 
@@ -412,7 +426,7 @@ var _hasAttr = function _hasAttr(attr, dom) {
   return dom.hasAttribute(attr);
 };
 
-var index$6 = curry_1(_hasAttr);
+var index$7 = curry_1(_hasAttr);
 
 // _hasClass :: String -> DOM Element -> Bool
 
@@ -420,13 +434,13 @@ var _hasClass = function _hasClass(cn, dom) {
   return dom.classList.contains(cn);
 };
 
-var index$7 = curry_1(_hasClass);
+var index$8 = curry_1(_hasClass);
 
 var hasData = function hasData(prop, dom) {
   return dom.dataset.hasOwnProperty(prop);
 };
 
-var index$8 = curry_1(hasData);
+var index$9 = curry_1(hasData);
 
 /* 
  * @sig String -> DOM Element -> Bool
@@ -436,13 +450,13 @@ var hasProp = function hasProp(prop, dom) {
   return prop in dom;
 };
 
-var index$9 = curry_1(hasProp);
+var index$10 = curry_1(hasProp);
 
 var _hasStyle = function _hasStyle(prop, dom) {
   return window.getComputedStyle(dom, null).hasOwnProperty(prop);
 };
 
-var index$10 = curry_1(_hasStyle);
+var index$11 = curry_1(_hasStyle);
 
 // _isAttr :: String -> String -> DOM Element -> Bool
 
@@ -450,7 +464,7 @@ var _isAttr = function _isAttr(attr, val, dom) {
   return dom.hasAttribute(attr) ? dom.getAttribute(attr) === val : null;
 };
 
-var index$11 = curry_1(_isAttr);
+var index$12 = curry_1(_isAttr);
 
 // _isData :: String -> String -> DOM Element -> Bool
 
@@ -458,7 +472,7 @@ var _isData = function _isData(prop, val, dom) {
   return dom.dataset.hasOwnProperty(prop) ? dom.dataset[prop] === val : null;
 };
 
-var index$12 = curry_1(_isData);
+var index$13 = curry_1(_isData);
 
 // _isProp :: String -> String -> DOM Element -> Bool
 
@@ -466,7 +480,7 @@ var _isProp = function _isProp(prop, val, dom) {
   return dom[prop] ? dom[prop] === val : null;
 };
 
-var index$13 = curry_1(_isProp);
+var index$14 = curry_1(_isProp);
 
 // _isStyle :: String -> String -> DOM Element -> Bool
 
@@ -475,7 +489,7 @@ var _isStyle = function _isStyle(prop, val, dom) {
   return domStyles.hasOwnProperty(prop) ? domStyles[prop] === val : null;
 };
 
-var index$14 = curry_1(_isStyle);
+var index$15 = curry_1(_isStyle);
 
 // _on :: String -> (a -> b) -> DOM Element -> DOM Element
 
@@ -484,7 +498,7 @@ var _on = function _on(event, handler, dom) {
   return dom;
 };
 
-var index$15 = curry_1(_on);
+var index$16 = curry_1(_on);
 
 // _removeAttr :: String -> DOM Element -> DOM Element
 
@@ -493,7 +507,7 @@ var _removeAttr = function _removeAttr(attr, dom) {
   return dom;
 };
 
-var index$16 = curry_1(_removeAttr);
+var index$17 = curry_1(_removeAttr);
 
 // _removeClass :: String | [String] -> DOM Element -> DOM Element
 var _removeClass = classList('remove');
@@ -505,7 +519,7 @@ var _replaceClass = function _replaceClass(ocn, ncn, dom) {
   return dom;
 };
 
-var index$17 = curry_1(_replaceClass);
+var index$18 = curry_1(_replaceClass);
 
 var isFormNode = function isFormNode(el) {
   return el && el.nodeType === 1 && el.nodeName === 'FORM';
@@ -573,7 +587,7 @@ var _setAttr = function _setAttr(attr, val, dom) {
   return dom;
 };
 
-var index$18 = curry_1(_setAttr);
+var index$19 = curry_1(_setAttr);
 
 // This regex checks the string passed in has the following qualities:
 // 1. Has no spaces.
@@ -598,7 +612,7 @@ var _setData = function _setData(prop, val, dom) {
   return null;
 };
 
-var index$19 = curry_1(_setData);
+var index$20 = curry_1(_setData);
 
 // _setProp :: String -> String -> DOM Element -> DOM Element
 
@@ -607,7 +621,7 @@ var _setProp = function _setProp(attr, val, dom) {
   return dom;
 };
 
-var index$20 = curry_1(_setProp);
+var index$21 = curry_1(_setProp);
 
 // _setStyle :: String -> String -> DOM Element -> DOM Element
 
@@ -616,7 +630,7 @@ var _setStyle = function _setStyle(prop, val, dom) {
   return dom;
 };
 
-var index$21 = curry_1(_setStyle);
+var index$22 = curry_1(_setStyle);
 
 // toggleClass :: String -> DOM Element -> DOM Element
 var toggleClass = classList('toggle');
@@ -630,26 +644,27 @@ exports.getAttr = index$1;
 exports.getClass = index$2;
 exports.getClasses = _getClasses;
 exports.getData = index$3;
-exports.getProp = index$4;
-exports.getStyle = index$5;
-exports.hasAttr = index$6;
-exports.hasClass = index$7;
-exports.hasData = index$8;
-exports.hasProp = index$9;
-exports.hasStyle = index$10;
-exports.isAttr = index$11;
-exports.isData = index$12;
-exports.isProp = index$13;
-exports.isStyle = index$14;
-exports.on = index$15;
-exports.removeAttr = index$16;
+exports.getPosition = index$4;
+exports.getProp = index$5;
+exports.getStyle = index$6;
+exports.hasAttr = index$7;
+exports.hasClass = index$8;
+exports.hasData = index$9;
+exports.hasProp = index$10;
+exports.hasStyle = index$11;
+exports.isAttr = index$12;
+exports.isData = index$13;
+exports.isProp = index$14;
+exports.isStyle = index$15;
+exports.on = index$16;
+exports.removeAttr = index$17;
 exports.removeClass = _removeClass;
-exports.replaceClass = index$17;
+exports.replaceClass = index$18;
 exports.serialize = _serialize;
-exports.setAttr = index$18;
-exports.setData = index$19;
-exports.setProp = index$20;
-exports.setStyle = index$21;
+exports.setAttr = index$19;
+exports.setData = index$20;
+exports.setProp = index$21;
+exports.setStyle = index$22;
 exports.toggleClass = toggleClass;
 
 Object.defineProperty(exports, '__esModule', { value: true });

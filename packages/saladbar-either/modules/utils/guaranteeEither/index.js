@@ -1,18 +1,19 @@
-import Result from 'folktale/result';
+import Either from 'data.either';
 import { all } from 'ramda';
 import isArray from '../is-array';
 import isElmNode from '../is-elm-node';
+import isEither from '../is-either';
 import dom from '../../dom';
 
 const guaranteeEither = el => {
-  if (Result.hasInstance(el)) {
+  if (isEither(el)) {
     return el;
   } else if (isElmNode(el) || (isArray(el) && all(isElmNode, el))) {
-    return Result.of(el);
+    return Either.of(el);
   } else if (typeof el === 'string') {
     return dom(el);
   }
-  return Result.Error({
+  return Either.Left({
     error: `Argument ${el} is not a valid type. Functions only accept Futures, DOM Elements, or valid selector string`,
   });
 };

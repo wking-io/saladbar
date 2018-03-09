@@ -1,4 +1,4 @@
-import Result from 'folktale/result';
+import Either from 'data.either';
 import test from 'tape';
 import classList from '../class-list';
 import createElement from '../utils/create/createElement';
@@ -53,7 +53,7 @@ test('classList adds multiple classes to multiple elements', assert => {
 
 test('classList adds single class to a future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actual = classList('add', 'new-class', futureEl);
   const expected = ['default', 'new-class'];
   actual.map(el =>
@@ -64,7 +64,7 @@ test('classList adds single class to a future element', assert => {
 
 test('classList adds multiple classes to a future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actual = classList('add', ['new-class', 'also-new'], futureEl);
   const expected = ['default', 'new-class', 'also-new'];
   actual.map(el =>
@@ -75,7 +75,7 @@ test('classList adds multiple classes to a future element', assert => {
 
 test('classList adds single class to multiple future elements', assert => {
   const document = createElement(2, { classes: 'default' });
-  const futureEls = Result.of(
+  const futureEls = Either.of(
     Array.from(document.querySelectorAll('.default'))
   );
   const actual = classList('add', ['new-class'], futureEls);
@@ -90,7 +90,7 @@ test('classList adds single class to multiple future elements', assert => {
 
 test('classList adds multiple classes to multiple future elements', assert => {
   const document = createElement(2, { classes: 'default' });
-  const futureEls = Result.of(
+  const futureEls = Either.of(
     Array.from(document.querySelectorAll('.default'))
   );
   const actual = classList('add', ['new-class', 'also-new'], futureEls);
@@ -153,7 +153,7 @@ test('classList removes multiple classes from multiple elements', assert => {
 
 test('classList removes single class from a future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actual = classList('remove', 'remove-class', futureEl);
   const expected = ['default'];
   actual.map(el =>
@@ -164,7 +164,7 @@ test('classList removes single class from a future element', assert => {
 
 test('classList removes multiple classes from a future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actual = classList('remove', ['remove-class', 'also-remove'], futureEl);
   const expected = ['default'];
   actual.map(el =>
@@ -175,7 +175,7 @@ test('classList removes multiple classes from a future element', assert => {
 
 test('classList removes single class from multiple future elements', assert => {
   const document = createElement(2, { classes: 'default' });
-  const futureEls = Result.of(
+  const futureEls = Either.of(
     Array.from(document.querySelectorAll('.default'))
   );
   const actual = classList('remove', ['remove-class'], futureEls);
@@ -190,7 +190,7 @@ test('classList removes single class from multiple future elements', assert => {
 
 test('classList removes multiple classes from multiple future elements', assert => {
   const document = createElement(2, { classes: 'default' });
-  const futureEls = Result.of(
+  const futureEls = Either.of(
     Array.from(document.querySelectorAll('.default'))
   );
   const actual = classList(
@@ -245,7 +245,7 @@ test('classList toggles single class from multiple elements', assert => {
 
 test('classList toggles single class from a future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actualOne = classList('toggle', 'toggle-class', futureEl);
   const expectedOne = ['default', 'toggle-class'];
   actualOne.map(el =>
@@ -261,7 +261,7 @@ test('classList toggles single class from a future element', assert => {
 
 test('classList toggles single class from multiple future elements', assert => {
   const document = createElement(2, { classes: 'default' });
-  const futureEls = Result.of(
+  const futureEls = Either.of(
     Array.from(document.querySelectorAll('.default'))
   );
   const actualOne = classList('toggle', 'toggle-class', futureEls);

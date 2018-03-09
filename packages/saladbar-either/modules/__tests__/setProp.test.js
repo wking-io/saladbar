@@ -1,5 +1,5 @@
 import { compose } from 'ramda';
-import Result from 'folktale/result';
+import Either from 'data.either';
 import test from 'tape';
 import createElement from '../utils/create/createElement';
 import getProp from '../get-prop';
@@ -28,7 +28,7 @@ test('setProp creates new property if property not found on single element', ass
 
 test('setProp sets value of property on future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actual = compose(getProp('innerHTML'), setProp('innerHTML', 'true'));
   const expected = 'true';
   actual(futureEl).map(attr => assert.equal(attr, expected));
@@ -37,7 +37,7 @@ test('setProp sets value of property on future element', assert => {
 
 test('setProp creates new prop if property not found on future element', assert => {
   const document = createElement(1, { classes: 'default' });
-  const futureEl = Result.of(document.querySelector('.default'));
+  const futureEl = Either.of(document.querySelector('.default'));
   const actual = compose(getProp('not-real'), setProp('not-real', 'false'));
   const expected = 'false';
   actual(futureEl).map(attr => assert.equal(attr, expected));

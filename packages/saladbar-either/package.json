@@ -1,6 +1,6 @@
 {
   "name": "saladbar-either",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Library of safe, composable dom functions.",
   "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
@@ -17,7 +17,6 @@
   "scripts": {
     "build": "node ./tools/build.js",
     "watch": "babel ./modules -d . --ignore __tests__ --watch",
-    "prepublishOnly": "node ./tools/build.js && yarn test:build",
     "clean": "git clean -fdX .",
     "lint": "eslint modules/**/*.js",
     "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
@@ -25,6 +24,7 @@
     "test:build": "babel-tape-runner __tests__/*.test.js | tap-spec"
   },
   "dependencies": {
+    "data.either": "1.5.1",
     "fluture": "8.0.1",
     "folktale": "2.1.0",
     "ramda": "0.25.0",

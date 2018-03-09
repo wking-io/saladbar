@@ -1,11 +1,11 @@
 import { curry } from 'ramda';
-import Result from 'folktale/result';
+import Either from 'data.either';
 import { setProp } from 'saladbar-core';
 
 // _setProp :: String -> String -> DOM Element -> Future Error DOM Element
 const _setProp = (prop, val, dom) =>
-  Result.fromNullable(setProp(prop, val, dom), {
+  Either.fromNullable(setProp(prop, val, dom)).leftMap(() => ({
     error: 'Error running setProp function.',
-  });
+  }));
 
 export default curry(_setProp);
