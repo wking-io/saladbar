@@ -1,4 +1,4 @@
-import { of } from 'fluture';
+import Either from 'data.either';
 import test from 'tape';
 import createForm from '../utils/create/createForm';
 import serialize from '../serialize';
@@ -15,32 +15,30 @@ test('serialize generates data object from form element.', assert => {
   const testForm = document.querySelector('.test-form');
   const actual = serialize(testForm);
   const expected = expectedData;
-  actual.fork(
-    err => assert.fail(`serialize returned an error - ${err.error}.`),
-    data => assert.deepEqual(data, expected)
-  );
+  actual
+    .leftMap(err => assert.fail(`serialize returned an error - ${err.error}.`))
+    .map(data => assert.deepEqual(data, expected));
   assert.end();
 });
 
-test('serialize generates data object from future form element.', assert => {
+test('serialize generates data object from either form element.', assert => {
   const document = createForm('test-form');
-  const futureForm = of(document.querySelector('.test-form'));
-  const actual = serialize(futureForm);
+  const eitherForm = Either.of(document.querySelector('.test-form'));
+  const actual = serialize(eitherForm);
   const expected = expectedData;
-  actual.fork(
-    err => assert.fail(`serialize returned an error - ${err.error}.`),
-    data => assert.deepEqual(data, expected)
-  );
+  actual
+    .leftMap(err => assert.fail(`serialize returned an error - ${err.error}.`))
+    .map(data => assert.deepEqual(data, expected));
   assert.end();
 });
 
 test('serialize returns error if passed an invalid input.', assert => {
   const actual = serialize({ selector: '.form' });
   const expected = true;
-  actual.fork(
-    err => assert.equal(err.hasOwnProperty('error'), expected),
-    data =>
+  actual
+    .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
+    .map(data =>
       assert.fail(`serialize returned success on intended failure - ${data}`)
-  );
+    );
   assert.end();
 });

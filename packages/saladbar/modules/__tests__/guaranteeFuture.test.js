@@ -1,35 +1,35 @@
-import { of } from 'fluture';
+import Either from 'data.either';
 import test from 'tape';
 import createElement from '../utils/create/createElement';
-import guaranteeFuture from '../utils/guaranteeFuture';
+import guaranteeEither from '../utils/guaranteeEither';
 
-test('guaranteeFuture just returns the input if it is a Future', assert => {
+test('guaranteeEither just returns the input if it is a Future', assert => {
   const document = createElement(1, { classes: 'default' });
   const testEl = document.querySelector('.default');
-  const expected = of(testEl);
-  const actual = guaranteeFuture(expected);
+  const expected = Either.of(testEl);
+  const actual = guaranteeEither(expected);
   assert.deepEqual(actual, expected);
   assert.end();
 });
 
-test('guaranteeFuture returns future of DOM Element if passed an unwrapped DOM Element', assert => {
+test('guaranteeEither returns future of DOM Element if passed an unwrapped DOM Element', assert => {
   const document = createElement(1, { classes: 'default' });
   const testEl = document.querySelector('.default');
   const expected = testEl;
-  const actual = guaranteeFuture(expected);
-  assert.deepEqual(actual, of(expected));
+  const actual = guaranteeEither(expected);
+  assert.deepEqual(actual, Either.of(expected));
   assert.end();
 });
 
-test('guaranteeFuture returns error if not passed a Future, DOM Element, or valid selector string.', assert => {
-  const actual = guaranteeFuture({ selector: 'default' });
+test('guaranteeEither returns error if not passed a Future, DOM Element, or valid selector string.', assert => {
+  const actual = guaranteeEither({ selector: 'default' });
   const expected = true;
-  actual.fork(
-    err => assert.equal(err.hasOwnProperty('error'), expected),
-    () =>
+  actual
+    .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
+    .map(() =>
       assert.fail(
-        'guaranteeFuture did not return error when passed an invalid input.'
+        'guaranteeEither did not return error when passed an invalid input.'
       )
-  );
+    );
   assert.end();
 });

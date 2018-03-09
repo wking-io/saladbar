@@ -18,9 +18,6 @@ const config = {
     }),
     commonjs({
       include: /node_modules/,
-      namedExports: {
-        'fluture/index.js': ['isFuture', 'of', 'reject', 'Future'],
-      },
     }),
   ],
 };

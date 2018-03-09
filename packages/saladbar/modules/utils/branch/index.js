@@ -1,9 +1,9 @@
 import { chain, compose, curry } from 'ramda';
 import guaranteeDomEl from '../guaranteeDomEl';
-import guaranteeFuture from '../guaranteeFuture';
+import guaranteeEither from '../guaranteeEither';
 import _branch from './_branch';
 
 const branch = (fn, el) =>
-  compose(chain(_branch(fn)), chain(guaranteeDomEl), guaranteeFuture)(el);
+  compose(chain(_branch(fn)), chain(guaranteeDomEl), guaranteeEither)(el);
 
 export default curry(branch);

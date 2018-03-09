@@ -1,8 +1,11 @@
 import { curry } from 'ramda';
-import { of } from 'fluture';
+import Either from 'data.either';
 import { replaceClass } from 'saladbar-core';
 
 // _replaceClass :: String -> String -> DOM Element -> Future Error DOM Element
-const _removeClass = (ocn, ncn, dom) => of(replaceClass(ocn, ncn, dom));
+const _replaceClass = (ocn, ncn, dom) =>
+  Either.fromNullable(replaceClass(ocn, ncn, dom)).leftMap(() => ({
+    error: 'Error running replaceClass',
+  }));
 
-export default curry(_removeClass);
+export default curry(_replaceClass);
