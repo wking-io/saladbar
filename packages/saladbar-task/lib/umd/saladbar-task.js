@@ -1627,7 +1627,7 @@ var _getPosition = function _getPosition(dom) {
     return top && right && bottom && left ? { top: top, right: right, bottom: bottom, left: left } : null;
 };
 
-curry_1(_getPosition);
+var getPosition = curry_1(_getPosition);
 
 // _getProp :: String -> DOM Element -> String | Null
 
@@ -2176,7 +2176,7 @@ var addClass$1 = function addClass(cn, dom) {
   return branch$1(_addClass$2(cn))(dom);
 };
 
-var index$1 = curry_1(addClass$1);
+var index = curry_1(addClass$1);
 
 // _classList :: String -> String -> DOM Element -> Future Error DOM Element
 var _classList$1 = function _classList(method, cn, dom) {
@@ -2190,7 +2190,7 @@ var classList$1 = function classList(method, cn, dom) {
   return branch$1(_classList$2(method, cn))(dom);
 };
 
-var index$2 = curry_1(classList$1);
+var index$1 = curry_1(classList$1);
 
 // _domAll :: String -> DOM Element -> Future Error [DOM Element]
 var _domAll$1 = function _domAll$$1(cs) {
@@ -2261,7 +2261,7 @@ var getAttr$1 = function getAttr(attr, dom) {
   return branch$1(_getAttr$2(attr))(dom);
 };
 
-var index$3 = curry_1(getAttr$1);
+var index$2 = curry_1(getAttr$1);
 
 // _getClass :: Int -> DOM Element -> Future Error String
 var _getClass$1 = function _getClass(idx, dom) {
@@ -2279,7 +2279,7 @@ var getClass$1 = function getClass(idx, dom) {
   return branch$1(_getClass$2(idx))(dom);
 };
 
-var index$4 = curry_1(getClass$1);
+var index$3 = curry_1(getClass$1);
 
 // _getClasses :: DOM Element -> Future Error String
 var _getClasses$1 = function _getClasses$$1(dom) {
@@ -2311,7 +2311,25 @@ var getData$1 = function getData(prop, dom) {
   return branch$1(_getData$2(prop))(dom);
 };
 
-var index$5 = curry_1(getData$1);
+var index$4 = curry_1(getData$1);
+
+// _getPosition :: String -> DOM Element -> Future Error String
+var _getPosition$1 = function _getPosition(prop, dom) {
+  var result = getPosition(prop, dom);
+
+  return result ? lib.of(result) : lib.rejected({
+    error: 'No attribute was found with the following name: ' + prop
+  });
+};
+
+var _getPosition$2 = curry_1(_getPosition$1);
+
+// getPosition :: String -> DOM Element -> Future Error String
+var getPosition$1 = function getPosition(prop, dom) {
+  return branch$1(_getPosition$2(prop))(dom);
+};
+
+var index$5 = curry_1(getPosition$1);
 
 // _getProp :: String -> DOM Element -> Future Error String
 var _getProp$1 = function _getProp(prop, dom) {
@@ -2653,16 +2671,17 @@ var identity = function identity(a) {
 }; // eslint-disable-line no-empty-function
 var globalFindParent = findParent$2(false);
 
-exports.addClass = index$1;
-exports.classList = index$2;
+exports.addClass = index;
+exports.classList = index$1;
 exports.dom = _dom$1;
 exports.domAll = _domAll$1;
 exports.findParent = globalFindParent;
 exports.forkOnEvent = index$21;
-exports.getAttr = index$3;
-exports.getClass = index$4;
+exports.getAttr = index$2;
+exports.getClass = index$3;
 exports.getClasses = getClasses$1;
-exports.getData = index$5;
+exports.getData = index$4;
+exports.getPosition = index$5;
 exports.getProp = index$6;
 exports.getStyle = index$7;
 exports.hasAttr = index$8;
