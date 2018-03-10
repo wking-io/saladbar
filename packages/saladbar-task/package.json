@@ -20,8 +20,7 @@
     "prepublishOnly": "node ./tools/build.js && yarn test:build",
     "clean": "git clean -fdX .",
     "lint": "eslint modules/**/*.js",
-    "format":
-      "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
+    "format": "prettier-eslint --trailing-comma es5 --single-quote --write 'modules/*/*.js'",
     "test": "babel-tape-runner modules/__tests__/*.test.js | tap-spec",
     "test:build": "babel-tape-runner __tests__/*.test.js | tap-spec"
   },
@@ -29,7 +28,7 @@
     "data.task": "3.1.1",
     "fluture": "8.0.1",
     "ramda": "0.25.0",
-    "saladbar-core": "^0.1.7"
+    "saladbar-core": "^0.1.9"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
