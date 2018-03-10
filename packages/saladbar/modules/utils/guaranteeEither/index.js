@@ -9,7 +9,11 @@ const guaranteeEither = el => {
   if (isEither(el)) {
     return el;
   } else if (isElmNode(el) || (isArray(el) && all(isElmNode, el))) {
-    return Either.of(el);
+    if (el.toString() === '[object NodeList]') {
+      return Either.of(Array.from(el));
+    } else {
+      return Either.of(el);
+    }
   } else if (typeof el === 'string') {
     return dom(el);
   }

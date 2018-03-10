@@ -1,41 +1,8 @@
-# saladbar 🥗
+# Saladbar 🥗
 
-Welcome to saladbar, a library of DOM functions built for composition that takes a functional approach to working with the DOM.
+Welcome to saladbar, a library of functions built for composition that take a functional approach to working with the DOM.
 
-**Why the name saladbar?** This library is used by combining smaller functions to build up chained DOM interactions and then consume it with a fork:
-
-```js
-// See point A below.
-const changeTheme = curry((color, dom) => compose(addClass(`theme--${color}`), setData('theme', color)(dom));
-
-// See point B below.
-const changeThemeMenuBlue = changeTheme('blue', '.menu');
-
-// See point C below.
-changeThemeMenuBlue.fork(console.error, console.log);
-```
-
-#### A: Combine individual building blocks for common use cases
-
-Let's pretend that you have a site where users can change the theme to a color they select. This function combines both the `addClass` and `setData` functions so that you now have one function that sets a class and a data attribute for any passed in DOM Element.
-
-You no longer have to define both of them separately on every DOM Element where you want this action to happen. You have one reusable function to pass around that take the dom element you want to change and the color you want to change it to.
-
-#### B: Load the composed function with arguments to reuse when you want
-
-Here we have now loaded our `changeTheme` function with a color and an element to make the changes to. However, none of the changes have happened at this point. That is because all functions in the library return a [Future](https://github.com/fluture-js/Fluture).
-
-#### C: Consume the built up transformation by forking it
-
-This is where it all happens. Up to this point we have just been building up transformations. The DOM has not been queried, there are no changes to DOM Elements. However, when we fork the built up function everything will be run.
-
-The method is called fork for a reason. With Futures we are now responsible and able to handle any errors that happen while trying to run our built up functions.
-
-If you are not familiar with some of the functional programming techniques seen above check out these awesome resources:
-
-* [Professor Frisby’s Introduces Composable Functional JavaScript](https://egghead.io/courses/professor-frisby-introduces-composable-functional-javascript)
-* [Professor Frisby’s Mostly Adequate Guide To Functional Programming](https://mostly-adequate.gitbooks.io/mostly-adequate-guide/)
-* [Master The JavaScript Interview: What Is Function Composition?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0)
+**Why the name saladbar?** This library is intended to be used by combining smaller functions to build complete programs. That sounds a lot like how a saladbar works. Also, I like food, and I think library names should be fun.
 
 ## Usage
 
@@ -49,15 +16,16 @@ functions: [`Object.assign`][js:object.assign] and [`Array.isArray`][js:array.is
 ### CommonJS Module
 
 ```js
-var compose = require('ramda');
-var { hasClass, dom } = require('saladbar');
+var { hasClass } = require('saladbar');
 
 // Given this html
 // <div class="default test"></div>
 
 var hasClassTest = hasClass('test');
 
-hasClassTest('.default').fork(console.error, console.log);
+hasClassTest('.default')
+  .map(console.log); // console.log value
+  .leftMap(console.error) // can also leftMap to check for errors
 //> true
 ```
 
@@ -73,29 +41,133 @@ import { hasClass } from 'saladbar';
 
 const hasClassTest = hasClass('test');
 
-hasClassTest('.default').fork(console.error, console.log);
+hasClassTest('.default')
+  .map(console.log); // console.log value
+  .leftMap(console.error) // can also leftMap to check for errors
 //> true
 ```
 
 ### Global Bundle (CDN)
 
-Saladbar is hosted in full with all of its dependencies at: [https://cdn.rawgit.com/wking-io/saladbar/f561e05b/packages/saladbar/lib/umd/saladbar.min.js](https://cdn.rawgit.com/wking-io/saladbar/f561e05b/packages/saladbar/lib/umd/saladbar.min.js)
+Saladbar is hosted in full with all of its dependencies at: [https://cdn.rawgit.com/wking-io/saladbar/8618f175/packages/saladbar/lib/umd/saladbar.min.js](https://cdn.rawgit.com/wking-io/saladbar/8618f175/packages/saladbar/lib/umd/saladbar.min.js)
 
 This script will add `saladbar` to the global scope.
 
 ## Overview
 
-If you are looking for the API Documentation for the core package that info is located in the packages own [README](https://github.com/wking-io/saladbar/tree/master/packages/saladbar-core).
+> **Disclaimer:** This library revolves around functional programming concepts. So if terms like pure functions, currying, and Monads ring zero bells my explanation of the befits of this library may fall short. If that is the case I highly recommend [Professor Frisby’s Mostly Adequate Guide To Functional Programming](https://mostly-adequate.gitbooks.io/mostly-adequate-guide/) as an introduction. It covers everything you need to get up an going with the concepts practiced in this library.
 
-### Motivation
+The goal of this library is to provide a set of focused, composable functions that cover common DOM interactions. Before diving into the API for each of the individual functions there are some universal guarantees and features for every function that I want to cover.
 
-**tl;dr**
+### All functions are curried by default
 
-I wanted an easier way to write more functional, imperative code on the Front End for projects that didn’t have the option of working with a View library like React or Vue.
+A curried function is a function that when called with fewer arguments than expected, returns a new function that takes the remaining arguments. If you are familiar with currying you know the power this gives you when you are composing functions. If you are not familiar with it, here are some examples that show it usefulness.
 
-If you wnat a deeper dive you can check out the blog post here:
+#### You can partially apply some functions to make a more focused utility
 
-[**Why Saladbar?**](http://google.com)
+```js
+/** setProp expects three arguments.
+ *
+ * 1. A property to set
+ * 2. The value to set it to
+ * 3. The element(s) to set it on
+ *
+ * Since functions are curried by default you can partially apply the
+ * innerHTML property to the function and create a new function that
+ * you can pass around anytime you want to write a value to an element.
+ **/
+const write = setProp('innerHTML');
+
+/** toggleClass expects two arguments.
+ *
+ * 1. A class to toggle
+ * 2. The dom element(s) to toggle it on
+ *
+ * Since functions are curried by default you can partially apply the
+ * class 'open' to the function and create a new function that you
+ * can pass around when you need to toggle an element's open state.
+ **/
+const toggleOpen = toggleClass('open');
+```
+
+#### You can partially apply functions that take more than one argument so that they can be composed like LEGO blocks
+
+```js
+/** This function composes partially applied functions so that all
+ * they need is the color to change the theme to and the element(s)
+ * to make those transformations on.
+ **/
+const changeTheme = color =>
+  compose(
+    write(`Wow, look I am ${color}`),
+    addClass(`theme-${color}`),
+    setData('theme', color)
+  );
+
+/** You can alse partially apply this function with set colors
+ * if you want to have more specific use cases.
+ **/
+const changeThemeToBlue = changeTheme('blue');
+const changeThemeToGreen = changeTheme('green');
+const changeThemeToOrange = changeTheme('orange');
+
+/** Now when we run the function below the following steps occur
+ *
+ * 1. Sets the 'data-theme' attribute to blue and returns the '.page-wrapper' element
+ * 2. Receives '.page-wrapper' element from setData and adds the class 'theme-blue' and returns the '.page-wrapper' element
+ * 3. Receives '.page-wrapper' element from addClass and sets the innerHTML to 'Wow, look I am blue' and returns the '.page-wrapper' element
+ **/
+changeThemeToBlue('.page-wrapper');
+```
+
+### All functions take the target element(s) last
+
+This is a common and powerful technique to make function composition as easy as possible. In function composition each function in the chain takes the return value of the previous function. So, by passing the target element(s) as the last param we can more easily chain together DOM tranformations on said element(s).
+
+```js
+// Function that sets a class, attribute, and style on the same element
+const addStuff = compose(
+  setAttr('aria-hidden', 'false'),
+  addClass('show-element'),
+  setStyle('display', 'block')
+);
+
+/** You can then call the function with any element you want and
+ * that element will be passed through each function in the composition.
+ **/
+addStuff('.element');
+```
+
+Since the functions might be used at any part of a composition chain all functions in the library allow the final argument to be any of the following cases:
+
+* If passed a CSS Selector the function will automatically fetch that element from the DOM using the `dom` function.
+* If passed an element or elements gotten by running `querySelector` or `querySelectorAll` they will be wrapped in an Either.
+* If passed an Either they will be checked to make sure it contains an element then it will move on.
+
+### All functions return an Either Monad
+
+This is the big one. Every function in this library returns an Either. Every function also handles composing these Either wrapped results by default so that you do not have to worry about how each function composes to the next.
+
+Why this approach? There are two main benefits.
+
+**No more runtime errors with “undefined is not a function” issues.** The Either Type is defined by its ability to evaluate actions and capture their results as either a Left(failure) or a Right(success). Then on subsequent actions to that result, functions only run over the success values. This means if there is an error in your runtime the rest of the actions are ignored and that error is capture for you to handle yourself. It will not crash or show during evaluation.
+
+**Guaranteed laws that every value adheres to.** The Either Type used in this library adheres to the following algebraic data types as outlined in the Fantasy-Land Spec:
+
+* Functor
+* Monad
+* Applicative
+* Chain
+
+This means that there are mathematical laws that define how these values can be used and combined. Any implementation that follows these laws is guaranteed to work the exact same.
+
+For a detailed overview of what this means I will point you again to [Professor Frisby’s Mostly Adequate Guide To Functional Programming](https://mostly-adequate.gitbooks.io/mostly-adequate-guide/) specifically chapters 8-12. Also [this](http://www.tomharding.me/2017/06/05/fantas-eel-and-specification-15/) series that breaks down the Fantasy-Land Spec and defines it in plain language.
+
+If you are not familiar with some of the functional programming techniques seen above check out these awesome resources:
+
+* [Professor Frisby’s Introduces Composable Functional JavaScript](https://egghead.io/courses/professor-frisby-introduces-composable-functional-javascript)
+* [Professor Frisby’s Mostly Adequate Guide To Functional Programming](https://mostly-adequate.gitbooks.io/mostly-adequate-guide/)
+* [Master The JavaScript Interview: What Is Function Composition?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0)
 
 ### Examples
 
@@ -171,43 +243,16 @@ might encounter some additional syntax that we use to describe JavaScript
 specific stuff, like functions that take
 [multiple arguments at once](#brackets).
 
-#### Brackets
-
-Most functions exposed by Fluture are curried. This is reflected in their type
-signatures by using an arrow at each step where partial application is possible.
-For example, the following line signifies a _curried_ function, because it has
-an arrow after each function argument:
-
-```hs
-add :: Number -> Number -> Number
-```
-
-We could have chosen to write the above line with "groups of one argument", but
-we usually leave the grouping brackets out for brevity:
-
-```hs
-add :: (Number) -> (Number) -> Number
-```
-
-In order to document functions and methods that are _not_ curried, we use
-grouping to show which arguments have to be provided at the same time:
-
-```hs
-add :: (Number, Number) -> Number
-```
-
 #### Types
 
-You'll find that some signatures refer to concrete types, such as `Future`.
+You'll find that some signatures refer to concrete types, such as `Either`.
 This is reference of the types used throughout the documentation:
 
-* **Future** - Instances of Future provided by Fluture.
+* **Either** - Instances of Either provided by `data.either`.
 * **Pair a b** - An array with exactly two elements: `[a, b]`.
 * **Error** - An object with a key of error and a string value that represents the error received.
-* **DOM Element** - Object representing an [Element Instance][js:element] in the JS Standard.
+* **DOM Element** - Since functions in this library accept multiple types of DOM Element representations (see Overview section above) this type represents any of those accepted values.
 * **DOM** - Global representing the browser [Document][js:dom]
-* **Selector** - Valid [CSS Selector][js:selector] as defined in the spec.
-* **Cancel** - The nullary [cancellation](#future) functions returned from computations.
 
 ### Grabbing elements from the DOM
 
@@ -370,6 +415,10 @@ addClassGreen('.pick-me').fork(console.error, console.log);
 addClassGreen('.pick-me').fork(console.error, console.log);
 //> [<h1 class="pick-me green blue">Title</h1>, <p class="pick-me green blue">Paragraph One</p>, <p class="pick-me green blue">Paragraph Two</p>]
 ```
+
+## Build Your Own
+
+If you are looking for how to wrap the core package with your own Data Type that info is located in the packages own [README](https://github.com/wking-io/saladbar/tree/master/packages/saladbar-core).
 
 ## License
 
