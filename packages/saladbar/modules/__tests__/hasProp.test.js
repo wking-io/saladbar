@@ -27,7 +27,7 @@ test('hasProp returns false when property does not exists on an element', assert
   assert.end();
 });
 
-test('hasProp returns true when class exists on a future element', assert => {
+test('hasProp returns true when class exists on a either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
@@ -39,7 +39,7 @@ test('hasProp returns true when class exists on a future element', assert => {
   assert.end();
 });
 
-test('hasProp returns false when class does not exists on a future element', assert => {
+test('hasProp returns false when class does not exists on a either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',

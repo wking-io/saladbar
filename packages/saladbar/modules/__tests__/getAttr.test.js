@@ -31,13 +31,13 @@ test('getAttr returns error if attribute not found on single element', assert =>
   assert.end();
 });
 
-test('getAttr returns value of attribute on future element', assert => {
+test('getAttr returns value of attribute on either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
-  const actual = getAttr('aria-expanded', futureEl);
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const actual = getAttr('aria-expanded', eitherEl);
   const expected = 'false';
   actual
     .leftMap(() => assert.fail('getAttr returned an error.'))
@@ -45,13 +45,13 @@ test('getAttr returns value of attribute on future element', assert => {
   assert.end();
 });
 
-test('getAttr returns error if attribute not found on future element', assert => {
+test('getAttr returns error if attribute not found on either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
-  const actual = getAttr('not-real', futureEl);
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const actual = getAttr('not-real', eitherEl);
   const expected = true;
   actual
     .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))

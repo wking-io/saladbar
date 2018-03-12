@@ -27,10 +27,10 @@ test('getClasses returns error if no classes found on element', assert => {
   assert.end();
 });
 
-test('getClasses returns object of classes with all classes that exist on a future element', assert => {
+test('getClasses returns object of classes with all classes that exist on a either element', assert => {
   const document = createElement(1, { classes: 'default also-this' });
-  const futureEl = Either.of(document.querySelector('.default'));
-  const result = getClasses(futureEl);
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const result = getClasses(eitherEl);
   const expected = 2;
   result
     .leftMap(() => assert.fail())
@@ -38,10 +38,10 @@ test('getClasses returns object of classes with all classes that exist on a futu
   assert.end();
 });
 
-test('getClasses returns error no classes found on a future element', assert => {
+test('getClasses returns error no classes found on a either element', assert => {
   const document = createElement(1, { classes: '', id: 'default' });
-  const futureEl = Either.of(document.querySelector('#default'));
-  const result = getClasses(futureEl);
+  const eitherEl = Either.of(document.querySelector('#default'));
+  const result = getClasses(eitherEl);
   const expected = true;
   result
     .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))

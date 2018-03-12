@@ -33,29 +33,29 @@ test('removeAttr does not return error if attribute not found on single element'
   assert.end();
 });
 
-test('removeAttr removes attribute on future element', assert => {
+test('removeAttr removes attribute on either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
+  const eitherEl = Either.of(document.querySelector('.default'));
   const actual = compose(hasAttr('aria-expanded'), removeAttr('aria-expanded'));
   const expected = false;
-  actual(futureEl)
+  actual(eitherEl)
     .leftMap(() => assert.fail('removeAttr returned an error.'))
     .map(attr => assert.equal(attr, expected));
   assert.end();
 });
 
-test('removeAttr does not return error if attribute not found on future element', assert => {
+test('removeAttr does not return error if attribute not found on either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
+  const eitherEl = Either.of(document.querySelector('.default'));
   const actual = compose(hasAttr('not-real'), removeAttr('not-real'));
   const expected = false;
-  actual(futureEl)
+  actual(eitherEl)
     .leftMap(() => assert.fail('removeAttr returned an error.'))
     .map(attr => assert.equal(attr, expected));
   assert.end();

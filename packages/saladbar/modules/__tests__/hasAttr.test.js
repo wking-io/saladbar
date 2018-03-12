@@ -27,7 +27,7 @@ test('hasAttr returns false when attribute does not exists on an element', asser
   assert.end();
 });
 
-test('hasAttr returns true when attribute exists on a future element', assert => {
+test('hasAttr returns true when attribute exists on a either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
@@ -39,7 +39,7 @@ test('hasAttr returns true when attribute exists on a future element', assert =>
   assert.end();
 });
 
-test('hasAttr returns false when attribute does not exists on a future element', assert => {
+test('hasAttr returns false when attribute does not exists on a either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',

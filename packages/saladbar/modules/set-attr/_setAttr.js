@@ -1,11 +1,11 @@
-import { curry } from 'ramda';
-import Either from 'data.either';
 import { setAttr } from 'saladbar-core';
+import branchAgain from '../utils/branchAgain';
+
+const error = () => ({
+  error: 'Error running setAttr function.',
+});
 
 // _setAttr :: String -> String -> DOM Element -> Future Error DOM Element
-const _setAttr = (attr, val, dom) =>
-  Either.fromNullable(setAttr(attr, val, dom)).leftMap(() => ({
-    error: 'Error running setAttr function.',
-  }));
+const _setAttr = branchAgain(setAttr, error);
 
-export default curry(_setAttr);
+export default _setAttr;

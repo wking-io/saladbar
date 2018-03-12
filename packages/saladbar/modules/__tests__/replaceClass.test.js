@@ -22,7 +22,7 @@ test('replaceClass switches out one of the current classes with a new class on a
   assert.end();
 });
 
-test('replaceClass switches out one of the current classes with a new class on a future element', assert => {
+test('replaceClass switches out one of the current classes with a new class on a either element', assert => {
   const document = createElement(1, { classes: 'default' });
   const testEl = Either.of(document.querySelector('.default'));
   const result = replaceClass('default', 'new', testEl);

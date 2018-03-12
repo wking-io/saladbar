@@ -20,7 +20,7 @@ test('findParent returns parent that matched the predicate on an element.', asse
   assert.end();
 });
 
-test('findParent returns parent that matched the predicate on a future element.', assert => {
+test('findParent returns parent that matched the predicate on a either element.', assert => {
   const { document } = createDom('default').window;
   const testEl = Either.of(document.querySelector('.default'));
   const testFindParent = findParent(document);
@@ -47,7 +47,7 @@ test('findParent returns body when passed an predicate that does not find a matc
   assert.end();
 });
 
-test('findParent returns body when passed an predicate that does not find a matching parent element on a future element.', assert => {
+test('findParent returns body when passed an predicate that does not find a matching parent element on a either element.', assert => {
   const { document } = createDom('default').window;
   const testEl = Either.of(document.querySelector('.default'));
   const testFindParent = findParent(document);

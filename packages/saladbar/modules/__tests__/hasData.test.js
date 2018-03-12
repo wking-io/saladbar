@@ -27,7 +27,7 @@ test('hasData returns false when data attribute does not exists on an element', 
   assert.end();
 });
 
-test('hasData returns true when data attribute exists on a future element', assert => {
+test('hasData returns true when data attribute exists on a either element', assert => {
   const document = createElement(1, {
     attrs: ['data-test="true"'],
     classes: 'default',
@@ -39,7 +39,7 @@ test('hasData returns true when data attribute exists on a future element', asse
   assert.end();
 });
 
-test('hasData returns false when data attribute does not exists on a future element', assert => {
+test('hasData returns false when data attribute does not exists on a either element', assert => {
   const document = createElement(1, {
     attrs: ['data-test="true"'],
     classes: 'default',

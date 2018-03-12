@@ -32,29 +32,89 @@ test('setAttr creates new attr if attribute not found on single element', assert
   assert.end();
 });
 
-test('setAttr sets value of attribute on future element', assert => {
+test('setAttr sets value of attribute on either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
+  const eitherEl = Either.of(document.querySelector('.default'));
   const actual = compose(
     getAttr('aria-expanded'),
     setAttr('aria-expanded', 'true')
   );
   const expected = 'true';
-  actual(futureEl).map(attr => assert.equal(attr, expected));
+  actual(eitherEl).map(attr => assert.equal(attr, expected));
   assert.end();
 });
 
-test('setAttr creates new attr if attribute not found on future element', assert => {
+test('setAttr creates new attr if attribute not found on either element', assert => {
   const document = createElement(1, {
     attrs: ['aria-expanded="false"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
+  const eitherEl = Either.of(document.querySelector('.default'));
   const actual = compose(getAttr('not-real'), setAttr('not-real', 'false'));
   const expected = 'false';
-  actual(futureEl).map(attr => assert.equal(attr, expected));
+  actual(eitherEl).map(attr => assert.equal(attr, expected));
+  assert.end();
+});
+
+test('setAttr sets value of Either attribute on single element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
+  const actual = compose(
+    getAttr('aria-expanded'),
+    setAttr('aria-expanded', Either.of('true'))
+  );
+  const expected = 'true';
+  actual(testEl).map(attr => assert.equal(attr, expected));
+  assert.end();
+});
+
+test('setAttr creates new attr if Either attribute not found on single element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const testEl = document.querySelector('.default');
+  const actual = compose(
+    getAttr('not-real'),
+    setAttr('not-real', Either.of('false'))
+  );
+  const expected = 'false';
+  actual(testEl).map(attr => assert.equal(attr, expected));
+  assert.end();
+});
+
+test('setAttr sets value of Either attribute on either element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const actual = compose(
+    getAttr('aria-expanded'),
+    setAttr('aria-expanded', Either.of('true'))
+  );
+  const expected = 'true';
+  actual(eitherEl).map(attr => assert.equal(attr, expected));
+  assert.end();
+});
+
+test('setAttr creates new attr if Either attribute not found on either element', assert => {
+  const document = createElement(1, {
+    attrs: ['aria-expanded="false"'],
+    classes: 'default',
+  });
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const actual = compose(
+    getAttr('not-real'),
+    setAttr('not-real', Either.of('false'))
+  );
+  const expected = 'false';
+  actual(eitherEl).map(attr => assert.equal(attr, expected));
   assert.end();
 });

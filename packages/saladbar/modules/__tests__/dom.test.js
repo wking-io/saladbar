@@ -4,7 +4,7 @@ import createElement from '../utils/create/createElement';
 import isElmNode from '../utils/is-elm-node';
 import dom from '../dom';
 
-test('dom returns a future that resolves to an element when element exists.', assert => {
+test('dom returns a either that resolves to an element when element exists.', assert => {
   const document = createElement(1, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = dom('.default', root);
@@ -15,7 +15,7 @@ test('dom returns a future that resolves to an element when element exists.', as
   assert.end();
 });
 
-test('dom returns a future that resolves to an error when element does not exists.', assert => {
+test('dom returns a either that resolves to an error when element does not exists.', assert => {
   const document = createElement(1, { classes: 'default' });
   const root = document.querySelector('.wrapper');
   const actual = dom('.not-real', root);
@@ -23,12 +23,12 @@ test('dom returns a future that resolves to an error when element does not exist
   actual
     .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
     .map(() =>
-      assert.fail(`Element that did not exist returned a resolved future`)
+      assert.fail(`Element that did not exist returned a resolved either`)
     );
   assert.end();
 });
 
-test('dom returns a future that resolves to an element when element exists and root is Future.', assert => {
+test('dom returns a either that resolves to an element when element exists and root is Future.', assert => {
   const document = createElement(1, { classes: 'default' });
   const root = Either.of(document.querySelector('.wrapper'));
   const actual = dom('.default', root);
@@ -39,7 +39,7 @@ test('dom returns a future that resolves to an element when element exists and r
   assert.end();
 });
 
-test('dom returns a future that resolves to an error when element does not exist and root is Future.', assert => {
+test('dom returns a either that resolves to an error when element does not exist and root is Future.', assert => {
   const document = createElement(1, { classes: 'default' });
   const root = Either.of(document.querySelector('.wrapper'));
   const actual = dom('.not-real', root);
@@ -47,7 +47,7 @@ test('dom returns a future that resolves to an error when element does not exist
   actual
     .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
     .map(() =>
-      assert.fail(`Element that did not exist returned a resolved future`)
+      assert.fail(`Element that did not exist returned a resolved either`)
     );
   assert.end();
 });

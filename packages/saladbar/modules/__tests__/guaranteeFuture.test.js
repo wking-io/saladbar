@@ -12,7 +12,7 @@ test('guaranteeEither just returns the input if it is a Future', assert => {
   assert.end();
 });
 
-test('guaranteeEither returns future of DOM Element if passed an unwrapped DOM Element', assert => {
+test('guaranteeEither returns either of DOM Element if passed an unwrapped DOM Element', assert => {
   const document = createElement(1, { classes: 'default' });
   const testEl = document.querySelector('.default');
   const expected = testEl;

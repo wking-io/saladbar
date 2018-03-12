@@ -31,13 +31,13 @@ test('getData returns error if data attribute not found on single element', asse
   assert.end();
 });
 
-test('getData returns value of data attribute on future element', assert => {
+test('getData returns value of data attribute on either element', assert => {
   const document = createElement(1, {
     attrs: ['data-test="true"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
-  const actual = getData('test', futureEl);
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const actual = getData('test', eitherEl);
   const expected = 'true';
   actual
     .leftMap(() => assert.fail('getData returned an error.'))
@@ -45,13 +45,13 @@ test('getData returns value of data attribute on future element', assert => {
   assert.end();
 });
 
-test('getData returns error if data attribute not found on future element', assert => {
+test('getData returns error if data attribute not found on either element', assert => {
   const document = createElement(1, {
     attrs: ['data-test="true"'],
     classes: 'default',
   });
-  const futureEl = Either.of(document.querySelector('.default'));
-  const actual = getData('not-real', futureEl);
+  const eitherEl = Either.of(document.querySelector('.default'));
+  const actual = getData('not-real', eitherEl);
   const expected = true;
   actual
     .leftMap(err => assert.equal(err.hasOwnProperty('error'), expected))
