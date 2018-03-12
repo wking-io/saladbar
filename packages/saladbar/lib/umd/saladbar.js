@@ -1706,7 +1706,7 @@ var getClass = curry_1(_getClass);
 
 // _getClasses :: DOM Element -> {k: v} | Null
 var _getClasses = function _getClasses(dom) {
-  return dom.classList.length > 0 ? dom.classList : null;
+  return dom.classList.length > 0 ? Array.from(dom.classList) : null;
 };
 
 // _getData :: String -> DOM Element -> String | Null
@@ -2031,7 +2031,11 @@ var guaranteeEither = function guaranteeEither(el) {
   if (isEither(el)) {
     return el;
   } else if (isElmNode(el) || isArray(el) && all_1(isElmNode, el)) {
-    return lib.of(el);
+    if (el.toString() === '[object NodeList]') {
+      return lib.of(Array.from(el));
+    } else {
+      return lib.of(el);
+    }
   } else if (typeof el === 'string') {
     return _dom$1(el);
   }
@@ -2553,74 +2557,78 @@ var hasStyle$1 = function hasStyle(prop, dom) {
 
 var index$11 = curry_1(hasStyle$1);
 
-// _isAttr :: String -> String -> DOM Element -> Future Error Bool
-var _isAttr$1 = function _isAttr(attr, val, dom) {
-  return lib.fromNullable(isAttr(attr, val, dom)).leftMap(function () {
-    return {
-      error: 'There is not an attribute with the following name on this element: ' + attr
-    };
-  });
+var branchAgain = function branchAgain(fn, errFn, prop, val, dom) {
+    return isEither(val) ? val.chain(function (v) {
+        return lib.fromNullable(fn(prop, v, dom));
+    }).leftMap(function () {
+        return errFn(prop);
+    }) : lib.fromNullable(fn(prop, val, dom)).leftMap(function () {
+        return errFn(prop);
+    });
 };
 
-var _isAttr$2 = curry_1(_isAttr$1);
+var branchAgain$1 = curry_1(branchAgain);
+
+var error = function error(attr) {
+  return {
+    error: 'There is not an attribute with the following name on this element: ' + attr
+  };
+};
+
+// _isAttr :: String -> String -> DOM Element -> Future Error Bool
+var _isAttr$1 = branchAgain$1(isAttr, error);
 
 // isAttr :: String -> String -> DOM Element -> Future Error Bool
 var isAttr$1 = function isAttr(attr, val, dom) {
-  return branch$1(_isAttr$2(attr, val))(dom);
+  return branch$1(_isAttr$1(attr, val))(dom);
 };
 
 var index$12 = curry_1(isAttr$1);
 
-// _isData :: String -> String -> DOM Element -> Future Error Bool
-var _isData$1 = function _isData(prop, val, dom) {
-  return lib.fromNullable(isData(prop, val, dom)).leftMap(function () {
-    return {
-      error: 'There is not a data-attribute with the following name on this element: ' + prop
-    };
-  });
+var error$1 = function error(prop) {
+  return {
+    error: 'There is not a data-attribute with the following name on this element: ' + prop
+  };
 };
 
-var _isData$2 = curry_1(_isData$1);
+// _isData :: String -> String -> DOM Element -> Future Error Bool
+var _isData$1 = branchAgain$1(isData, error$1);
 
 // isData :: String -> String -> DOM Element -> Future Error Bool
 var isData$1 = function isData(prop, val, dom) {
-  return branch$1(_isData$2(prop, val))(dom);
+  return branch$1(_isData$1(prop, val))(dom);
 };
 
 var index$13 = curry_1(isData$1);
 
-// _isProp :: String -> String -> DOM Element -> Future Error Bool
-var _isProp$1 = function _isProp(prop, val, dom) {
-  return lib.fromNullable(isProp(prop, val, dom)).leftMap(function () {
-    return {
-      error: 'There is not a property with the following name on this element: ' + prop
-    };
-  });
+var error$2 = function error(prop) {
+  return {
+    error: 'There is not a property with the following name on this element: ' + prop
+  };
 };
 
-var _isProp$2 = curry_1(_isProp$1);
+// _isProp :: String -> String -> DOM Element -> Future Error Bool
+var _isProp$1 = branchAgain$1(isProp, error$2);
 
 // isProp :: String -> String -> DOM Element -> Future Error Bool
 var isProp$1 = function isProp(prop, val, dom) {
-  return branch$1(_isProp$2(prop, val))(dom);
+  return branch$1(_isProp$1(prop, val))(dom);
 };
 
 var index$14 = curry_1(isProp$1);
 
-// _isStyle :: String -> String -> DOM Element -> Future Error Bool
-var _isStyle$1 = function _isStyle(prop, val, dom) {
-  return lib.fromNullable(isStyle(prop, val, dom)).leftMap(function () {
-    return {
-      error: 'There is not a style property with the following name on this element: ' + prop
-    };
-  });
+var error$3 = function error(prop) {
+  return {
+    error: 'There is not a style property with the following name on this element: ' + prop
+  };
 };
 
-var _isStyle$2 = curry_1(_isStyle$1);
+// _isStyle :: String -> String -> DOM Element -> Future Error Bool
+var _isStyle$1 = branchAgain$1(isStyle, error$3);
 
 // isStyle :: String -> String -> DOM Element -> Future Error Bool
 var isStyle$1 = function isStyle(prop, val, dom) {
-  return branch$1(_isStyle$2(prop, val))(dom);
+  return branch$1(_isStyle$1(prop, val))(dom);
 };
 
 var index$15 = curry_1(isStyle$1);
@@ -2711,74 +2719,66 @@ var serialize$1 = function serialize(form) {
   return branch$1(_serialize$1)(form);
 };
 
-// _setAttr :: String -> String -> DOM Element -> Future Error DOM Element
-var _setAttr$1 = function _setAttr(attr, val, dom) {
-  return lib.fromNullable(setAttr(attr, val, dom)).leftMap(function () {
-    return {
-      error: 'Error running setAttr function.'
-    };
-  });
+var error$4 = function error() {
+  return {
+    error: 'Error running setAttr function.'
+  };
 };
 
-var _setAttr$2 = curry_1(_setAttr$1);
+// _setAttr :: String -> String -> DOM Element -> Future Error DOM Element
+var _setAttr$1 = branchAgain$1(setAttr, error$4);
 
 // setAttr :: String -> String -> DOM Element -> Future Error DOM Element
 var setAttr$1 = function setAttr(attr, val, dom) {
-  return branch$1(_setAttr$2(attr, val))(dom);
+  return branch$1(_setAttr$1(attr, val))(dom);
 };
 
 var index$20 = curry_1(setAttr$1);
 
-// _setData :: String -> String -> DOM Element -> Future Error DOM Element
-var _setData$1 = function _setData(prop, val, dom) {
-  return lib.fromNullable(setData(prop, val, dom)).leftMap(function () {
-    return {
-      error: 'The following data attribute you passed in is not valid: ' + prop
-    };
-  });
+var error$5 = function error(prop) {
+  return {
+    error: 'The following data attribute you passed in is not valid: ' + prop
+  };
 };
 
-var _setData$2 = curry_1(_setData$1);
+// _setData :: String -> String -> DOM Element -> Future Error DOM Element
+var _setData$1 = branchAgain$1(setData, error$5);
 
 // setData:: String -> String -> DOM Element -> Future Error DOM Element
 var setData$1 = function setData(prop, val, dom) {
-  return branch$1(_setData$2(prop, val))(dom);
+  return branch$1(_setData$1(prop, val))(dom);
 };
 
 var index$21 = curry_1(setData$1);
 
-// _setProp :: String -> String -> DOM Element -> Future Error DOM Element
-var _setProp$1 = function _setProp(prop, val, dom) {
-  return lib.fromNullable(setProp(prop, val, dom)).leftMap(function () {
-    return {
-      error: 'Error running setProp function.'
-    };
-  });
+var error$6 = function error() {
+  return {
+    error: 'Error running setProp function.'
+  };
 };
 
-var _setProp$2 = curry_1(_setProp$1);
+// _setProp :: String -> String -> DOM Element -> Future Error DOM Element
+var _setProp$1 = branchAgain$1(setProp, error$6);
 
 // setProp :: String -> String -> DOM Element -> Future Error DOM Element
 var setProp$1 = function setProp(prop, val, dom) {
-  return branch$1(_setProp$2(prop, val))(dom);
+  return branch$1(_setProp$1(prop, val))(dom);
 };
 
 var index$22 = curry_1(setProp$1);
 
-// _setStyle :: String -> String -> DOM Element -> Future Error DOM Element
-var _setStyle$1 = function _setStyle(prop, val, dom) {
-  return lib.fromNullable(setStyle(prop, val, dom)).leftMap(function () {
-    return {
-      error: 'Error running setStyle function.'
-    };
-  });
+var error$7 = function error(prop) {
+  return {
+    error: 'There is not a data-attribute with the following name on this element: ' + prop
+  };
 };
 
-var _setStyle$2 = curry_1(_setStyle$1);
+// _setStyle :: String -> String -> DOM Element -> Future Error DOM Element
+var _setStyle$1 = branchAgain$1(setStyle, error$7);
 
 // setStyle :: String -> String -> DOM Element -> Future Error DOM Element
 var setStyle$1 = function setStyle(prop, val, dom) {
-  return branch$1(_setStyle$2(prop, val))(dom);
+  return branch$1(_setStyle$1(prop, val))(dom);
 };
 
 var index$23 = curry_1(setStyle$1);

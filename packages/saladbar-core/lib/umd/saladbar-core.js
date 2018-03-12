@@ -379,7 +379,7 @@ var index$2 = curry_1(_getClass);
 
 // _getClasses :: DOM Element -> {k: v} | Null
 var _getClasses = function _getClasses(dom) {
-  return dom.classList.length > 0 ? dom.classList : null;
+  return dom.classList.length > 0 ? Array.from(dom.classList) : null;
 };
 
 // _getData :: String -> DOM Element -> String | Null
