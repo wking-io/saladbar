@@ -1,16 +1,11 @@
-import { curry } from 'ramda';
-import Task from 'data.task';
 import { isAttr } from 'saladbar-core';
+import branchAgain from '../utils/branchAgain';
+
+const error = attr => ({
+  error: `There is not an attribute with the following name on this element: ${attr}`,
+});
 
 // _isAttr :: String -> String -> DOM Element -> Future Error Bool
-const _isAttr = (attr, val, dom) => {
-  const result = isAttr(attr, val, dom);
+const _isAttr = branchAgain(isAttr, error);
 
-  return result !== null
-    ? Task.of(result)
-    : Task.rejected({
-        error: `There is not an attribute with the following name on this element: ${attr}`,
-      });
-};
-
-export default curry(_isAttr);
+export default _isAttr;

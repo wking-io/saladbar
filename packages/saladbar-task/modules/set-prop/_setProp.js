@@ -1,8 +1,11 @@
-import { curry } from 'ramda';
-import Task from 'data.task';
 import { setProp } from 'saladbar-core';
+import branchAgain from '../utils/branchAgain';
+
+const error = () => ({
+  error: `Error while trying to run setProp function.`,
+});
 
 // _setProp :: String -> String -> DOM Element -> Future Error DOM Element
-const _setProp = (prop, val, dom) => Task.of(setProp(prop, val, dom));
+const _setProp = branchAgain(setProp, error);
 
-export default curry(_setProp);
+export default _setProp;

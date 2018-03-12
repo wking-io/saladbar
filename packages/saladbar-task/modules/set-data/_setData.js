@@ -1,16 +1,11 @@
-import Task from 'data.task';
-import { curry } from 'ramda';
 import { setData } from 'saladbar-core';
+import branchAgain from '../utils/branchAgain';
+
+const error = prop => ({
+  error: `The following data attribute you passed in is not valid: ${prop}`,
+});
 
 // _setData :: String -> String -> DOM Element -> Future Error DOM Element
-const _setData = (prop, val, dom) => {
-  const result = setData(prop, val, dom);
+const _setData = branchAgain(setData, error);
 
-  return result
-    ? Task.of(result)
-    : Task.rejected({
-        error: `The following data attribute you passed in is not valid: ${prop}`,
-      });
-};
-
-export default curry(_setData);
+export default _setData;

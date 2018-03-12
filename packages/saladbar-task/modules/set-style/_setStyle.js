@@ -1,8 +1,11 @@
-import { curry } from 'ramda';
-import Task from 'data.task';
 import { setStyle } from 'saladbar-core';
+import branchAgain from '../utils/branchAgain';
+
+const error = () => ({
+  error: `Error while trying to run setStyle function.`,
+});
 
 // _setStyle :: String -> String -> DOM Element -> Future Error DOM Element
-const _setStyle = (prop, val, dom) => Task.of(setStyle(prop, val, dom));
+const _setStyle = branchAgain(setStyle, error);
 
-export default curry(_setStyle);
+export default _setStyle;
