@@ -1,6 +1,6 @@
 {
   "name": "saladbar-task",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Library of safe, composable dom functions.",
   "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
@@ -28,7 +28,7 @@
     "data.task": "3.1.1",
     "fluture": "8.0.1",
     "ramda": "0.25.0",
-    "saladbar-core": "^0.1.9"
+    "saladbar-core": "^0.1.11"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

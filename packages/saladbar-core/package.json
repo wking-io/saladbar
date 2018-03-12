@@ -1,6 +1,6 @@
 {
   "name": "saladbar-core",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "Core helper functions for building composable dom functions.",
   "main": "lib/cjs/index.js",
   "keywords": [
