@@ -1,9 +1,11 @@
 import { curry } from 'ramda';
 
-// _getData :: String -> DOM Element -> String | Null
+// _getPosition :: String -> DOM Element -> String | Null
 const _getPosition = dom => {
   const { top, right, bottom, left } = dom.getBoundingClientRect();
-  return top && right && bottom && left ? { top, right, bottom, left } : null;
+  return top !== null && right !== null && bottom !== null && left !== null
+    ? { top, right, bottom, left }
+    : null;
 };
 
 export default curry(_getPosition);

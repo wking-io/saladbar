@@ -1,7 +1,7 @@
 import branch from '../utils/branch';
-import _getData from './_getPosition';
+import _getPosition from './_getPosition';
 
 // getData :: String -> DOM Element -> Future Error String
-const getPosition = dom => branch(_getData)(dom);
+const getPosition = dom => branch(_getPosition)(dom);
 
 export default getPosition;
