@@ -1717,7 +1717,7 @@ var _getData = function _getData(prop, dom) {
 
 var getData = curry_1(_getData);
 
-// _getData :: String -> DOM Element -> String | Null
+// _getPosition :: String -> DOM Element -> String | Null
 
 var _getPosition = function _getPosition(dom) {
     var _dom$getBoundingClien = dom.getBoundingClientRect(),
@@ -1726,7 +1726,7 @@ var _getPosition = function _getPosition(dom) {
         bottom = _dom$getBoundingClien.bottom,
         left = _dom$getBoundingClien.left;
 
-    return top && right && bottom && left ? { top: top, right: right, bottom: bottom, left: left } : null;
+    return top !== null && right !== null && bottom !== null && left !== null ? { top: top, right: right, bottom: bottom, left: left } : null;
 };
 
 var getPosition = curry_1(_getPosition);
