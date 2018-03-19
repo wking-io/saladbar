@@ -1,6 +1,6 @@
 {
   "name": "saladbar",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Library of safe, composable dom functions.",
   "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
@@ -26,7 +26,7 @@
   "dependencies": {
     "data.either": "1.5.1",
     "ramda": "0.25.0",
-    "saladbar-core": "^0.1.13"
+    "saladbar-core": "^0.1.14"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
