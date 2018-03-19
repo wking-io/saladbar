@@ -1,4 +1,4 @@
-# Saladbar 🥗
+![logo](./saladbar-logo.png)
 
 Welcome to saladbar, a library of functions built for composition that take a functional approach to working with the DOM.
 

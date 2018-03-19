@@ -632,6 +632,16 @@ var _setStyle = function _setStyle(prop, val, dom) {
 
 var index$22 = curry_1(_setStyle);
 
+var toBool = function toBool(str) {
+  if (str === 'true') {
+    return true;
+  } else if (str === 'false') {
+    return false;
+  }
+
+  return null;
+};
+
 // toggleClass :: String -> DOM Element -> DOM Element
 var toggleClass = classList('toggle');
 
@@ -665,6 +675,7 @@ exports.setAttr = index$19;
 exports.setData = index$20;
 exports.setProp = index$21;
 exports.setStyle = index$22;
+exports.toBool = toBool;
 exports.toggleClass = toggleClass;
 
 Object.defineProperty(exports, '__esModule', { value: true });
