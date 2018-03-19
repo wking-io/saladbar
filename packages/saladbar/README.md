@@ -1,4 +1,4 @@
-# Saladbar 🥗
+![logo](./saladbar-logo.png)
 
 Welcome to saladbar, a library of functions built for composition that take a functional approach to working with the DOM.
 
@@ -1146,6 +1146,34 @@ on('click', expandOnClick('.pick-me'), '[data-expand-wrapper]');
 ```
 
 ### Utility Functions
+
+#### toBool
+
+`toBool :: String → Either Error Bool`
+
+Function that takes the string representation of `true` and `false` boolean values and returns the actual boolean value. This is useful when you need an boolean when getting the value of an element attribute.
+
+Note: Function takes both string versions of booleans and Either wrapped versions.
+
+```js
+toBool('true').map(console.log));
+//> true
+
+toBool('false').map(console.log));
+//> false
+
+toBool(1).map(console.log));
+//> error: "Argument 1 is not a String or Array String."
+
+toBool(Either.of('true')).map(console.log));
+//> true
+
+toBool(Either.of('false')).map(console.log));
+//> false
+
+toBool(Either.of(1)).map(console.log));
+//> error: "Argument 1 is not a String or Array String."
+```
 
 #### identity
 
