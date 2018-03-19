@@ -2003,6 +2003,16 @@ var _setStyle = function _setStyle(prop, val, dom) {
 
 var setStyle = curry_1(_setStyle);
 
+var toBool = function toBool(str) {
+  if (str === 'true') {
+    return true;
+  } else if (str === 'false') {
+    return false;
+  }
+
+  return null;
+};
+
 // toggleClass :: String -> DOM Element -> DOM Element
 var toggleClass = classList('toggle');
 
@@ -2783,6 +2793,44 @@ var setStyle$1 = function setStyle(prop, val, dom) {
 
 var index$23 = curry_1(setStyle$1);
 
+// _toBool :: String -> Either Error Bool
+var _toBool = function _toBool(str) {
+  return lib.fromNullable(toBool(str)).leftMap(function () {
+    return {
+      error: 'String supplied does not match either true of false.'
+    };
+  });
+};
+
+var makeEither = function makeEither(str) {
+  var isString = function isString(s) {
+    return typeof s === 'string';
+  };
+
+  if (isEither(str)) {
+    return str;
+  } else if (isArray(str) && str.map(isString)) {
+    return lib.of(str);
+  } else if (isString(str)) {
+    return lib.of(str);
+  }
+  return lib.Left({
+    error: 'Argument ' + str + ' is not a String or Array String.'
+  });
+};
+
+var _branch$2 = function _branch(fn) {
+  return ifElse_1(isArray, traverse_1(lib.of, fn), fn);
+};
+
+var branchBool = function branchBool(fn, str) {
+  return compose_1(chain_1(_branch$2(fn)), makeEither)(str);
+};
+
+var toBool$2 = function toBool(str) {
+  return branchBool(_toBool, str);
+};
+
 // _toggleClass :: String -> DOM Element -> Future Error DOM Element
 var _toggleClass = function _toggleClass(cn, dom) {
   return lib.fromNullable(toggleClass(cn, dom)).leftMap(function () {
@@ -2837,6 +2885,7 @@ exports.setAttr = index$20;
 exports.setData = index$21;
 exports.setProp = index$22;
 exports.setStyle = index$23;
+exports.toBool = toBool$2;
 exports.toggleClass = index$24;
 
 Object.defineProperty(exports, '__esModule', { value: true });

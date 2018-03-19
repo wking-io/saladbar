@@ -28,6 +28,7 @@ import setAttr from './set-attr';
 import setData from './set-data';
 import setProp from './set-prop';
 import setStyle from './set-style';
+import toBool from './to-bool';
 import toggleClass from './toggle-class';
 
 const identity = a => a; // eslint-disable-line no-empty-function
@@ -65,5 +66,6 @@ export {
   setData,
   setProp,
   setStyle,
+  toBool,
   toggleClass,
 };
